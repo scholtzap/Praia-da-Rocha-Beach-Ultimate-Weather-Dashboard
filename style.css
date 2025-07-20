@@ -56,6 +56,61 @@ h2 {
   font-size: 0.9rem;
 }
 
+/* Forecast container */
+.hourly-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+/* Each hour's data block */
+.hour-block {
+  flex: 0 0 auto;
+  min-width: 80px;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-size: 0.9em;
+}
+
+/* Day selector */
+.day-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 5px 0;
+  margin-bottom: 10px;
+}
+
+.day-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: #0288d1;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.day-button:hover {
+  background-color: #026aa7;
+}
+
+@media (max-width: 600px) {
+  .hour-block {
+    min-width: 70px;
+    font-size: 0.8em;
+  }
+  .day-button {
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
+}
+
 footer {
   text-align: center;
   padding: 1rem;
