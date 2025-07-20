@@ -41,6 +41,12 @@ h2, h3 {
   color: #90caf9;
 }
 
+.day-button.selected-day {
+  background-color: #004d71;
+  box-shadow: 0 0 0 3px #90caf9 inset;
+  font-weight: bold;
+}
+
 #forecast-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));

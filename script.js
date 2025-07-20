@@ -7,13 +7,21 @@ async function loadWeather() {
     const res = await fetch('data/weather.json');
     const weather = await res.json();
 
-    const dailyGroups = groupByDay(weather.hourly);
+    const tzOffsetMs = 2 * 60 * 60 * 1000; // GMT+2
+    const now = new Date();
+    const cutoff = new Date(now.getTime() + tzOffsetMs);
+    cutoff.setUTCHours(0, 0, 0, 0); // Start of today in GMT+2
+
+    const futureHourly = weather.hourly
+      .map(h => ({ ...h, date: new Date(h.dt * 1000) }))
+      .filter(h => h.date >= cutoff); // only today and later
+
+    const dailyGroups = groupByDay(futureHourly);
     renderDayCarousel(dailyGroups);
 
-    // Initially load today
-    const today = new Date().toISOString().split('T')[0];
-    if (dailyGroups[today]) {
-      renderDayCharts(dailyGroups[today]);
+    const todayKey = new Date(cutoff).toISOString().split("T")[0];
+    if (dailyGroups[todayKey]) {
+      renderDayCharts(dailyGroups[todayKey]);
     }
   } catch (err) {
     console.error('Failed to load weather data:', err);
@@ -24,7 +32,8 @@ function groupByDay(hourly) {
   const days = {};
   hourly.forEach(h => {
     const date = new Date(h.dt * 1000);
-    const key = date.toISOString().split('T')[0];
+    const tzOffsetMs = 2 * 60 * 60 * 1000; // GMT+2
+    const key = new Date(date.getTime() + tzOffsetMs).toISOString().split('T')[0];
     if (!days[key]) days[key] = [];
     days[key].push({ ...h, date });
   });
@@ -63,13 +72,80 @@ function renderDayCarousel(dayGroups) {
     const date = new Date(dateKey);
     const weekday = date.toLocaleDateString("en-ZA", { weekday: "short" });
     const label = `${weekday}, ${date.getDate()}/${date.getMonth() + 1}`;
-    const scoreAvg = Math.round(entries.reduce((s, h) => s + calculateFrisbeeScore(h), 0) / entries.length);
+    const peakScore = Math.max(...entries.map(h => calculateFrisbeeScore(h)));
 
     const btn = document.createElement("button");
     btn.className = "day-button";
-    btn.innerHTML = `<strong>${label}</strong><br/>Score: ${scoreAvg}/10`;
-    btn.onclick = () => renderDayCharts(entries);
+    btn.innerHTML = `<strong>${label}</strong><br/>Score: ${peakScore}/10`;
+    btn.onclick = () => {
+      // Remove previous highlights
+      document.querySelectorAll(".day-button").forEach(b => b.classList.remove("selected-day"));
+      btn.classList.add("selected-day");
+      renderDayCharts(entries);
+    };
     container.appendChild(btn);
+  });
+
+  // Auto-select today if available
+  const todayKey = new Date().toISOString().split("T")[0];
+  const todayBtn = container.querySelector(".day-button");
+  if (todayBtn) todayBtn.classList.add("selected-day");
+}
+
+async function loadTides() {
+  try {
+    const res = await fetch('data/tides.json');
+    const data = await res.json();
+    return data.tides.map(t => ({
+      time: new Date(t.time),
+      type: t.type
+    }));
+  } catch (err) {
+    console.error('Failed to load tide data:', err);
+    return [];
+  }
+}
+
+function renderTideChart(tides) {
+  const labels = tides.map(t => t.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+  const values = tides.map(t => t.type === 'high' ? 1 : 0); // 1 for high, 0 for low
+
+  if (chartInstances['tideChart']) chartInstances['tideChart'].destroy();
+
+  const ctx = document.getElementById('tideChart').getContext('2d');
+  chartInstances['tideChart'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Tide',
+        data: values,
+        tension: 0.3,
+        fill: true,
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        pointBackgroundColor: values.map(v => v === 1 ? '#2196f3' : '#ffc107'),
+        borderColor: '#999',
+        backgroundColor: 'rgba(33, 150, 243, 0.2)',
+        stepped: true
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          min: -0.1,
+          max: 1.1,
+          ticks: {
+            callback: value => value === 1 ? 'High' : value === 0 ? 'Low' : '',
+            stepSize: 1
+          }
+        }
+      }
+    }
   });
 }
 
@@ -83,27 +159,42 @@ function renderDayCharts(hourly) {
   const rain = hourly.map(h => h.rain_mm);
   const clouds = hourly.map(h => h.clouds);
 
+  const playability = hourly.map(h => calculateFrisbeeScore(h));
+
   drawChart('tempUvChart', labels, [
-    { label: 'Temperature (°C)', data: temp, yAxisID: 'y' },
-    { label: 'UV Index', data: uvi, yAxisID: 'y1' }
+    { label: 'Temperature (°C)', data: temp, yAxisID: 'y', fill: false, tension: 0.3 },
+    { label: 'Playability Score', data: playability, yAxisID: 'y1', fill: false, tension: 0.3 }
   ], {
-    y: { min: Math.min(...temp, 0), beginAtZero: true },
-    y1: { min: 0, max: 12 }
+    y: {
+      min: Math.min(...temp, 0),
+      beginAtZero: true
+    },
+    y1: {
+      min: 0,
+      max: 10,
+      position: 'right',
+      grid: { drawOnChartArea: false },
+      ticks: { stepSize: 1 }
+    }
   });
 
+  const windMax = Math.max(20, Math.ceil(Math.max(...wind))); // Default max 20 kph
+
   drawChart('windHumidityChart', labels, [
-    { label: 'Wind (kph)', data: wind, yAxisID: 'y' },
-    { label: 'Humidity (%)', data: humidity, yAxisID: 'y1' }
+    { label: 'Wind (kph)', data: wind, yAxisID: 'y', fill: true, tension: 0.3 },
+    { label: 'Humidity (%)', data: humidity, yAxisID: 'y1', fill: false, tension: 0.3 }
   ], {
-    y: { min: 0 },
+    y: { min: 0, max: windMax },
     y1: { min: 0, max: 100 }
   });
 
+  const rainMax = Math.max(5, Math.ceil(Math.max(...rain))); // Default 5mm, or more if needed
+
   drawChart('rainCloudChart', labels, [
-    { label: 'Rain (mm)', data: rain, yAxisID: 'y' },
-    { label: 'Cloud Cover (%)', data: clouds, yAxisID: 'y1' }
+    { label: 'Rain (mm)', data: rain, yAxisID: 'y', fill: true, tension: 0.3 },
+    { label: 'Cloud Cover (%)', data: clouds, yAxisID: 'y1', fill: false, tension: 0.3 }
   ], {
-    y: { min: 0 },
+    y: { min: 0, max: rainMax },
     y1: { min: 0, max: 100 }
   });
 }
@@ -140,4 +231,9 @@ function drawChart(canvasId, labels, datasets, axisOptions) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', loadWeather);
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadWeather();
+  const tides = await loadTides();
+  renderTideChart(tides);
+});
+
