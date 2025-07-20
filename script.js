@@ -1,6 +1,7 @@
 // script.js (Chart-based forecast visualization + date selector carousel)
 
 let chartInstances = {};
+let cachedTides = [];
 
 async function loadWeather() {
   try {
@@ -78,18 +79,24 @@ function renderDayCarousel(dayGroups) {
     btn.className = "day-button";
     btn.innerHTML = `<strong>${label}</strong><br/>Score: ${peakScore}/10`;
     btn.onclick = () => {
-      // Remove previous highlights
       document.querySelectorAll(".day-button").forEach(b => b.classList.remove("selected-day"));
       btn.classList.add("selected-day");
+
       renderDayCharts(entries);
+      renderTideChart(cachedTides, dateKey); // ← now properly invoked on click
     };
+
     container.appendChild(btn);
   });
 
   // Auto-select today if available
   const todayKey = new Date().toISOString().split("T")[0];
-  const todayBtn = container.querySelector(".day-button");
-  if (todayBtn) todayBtn.classList.add("selected-day");
+  const buttons = container.querySelectorAll(".day-button");
+
+  if (buttons.length > 0) {
+    buttons[0].classList.add("selected-day");
+    buttons[0].click(); // Also trigger click to load weather + tides
+  }
 }
 
 async function loadTides() {
@@ -98,6 +105,7 @@ async function loadTides() {
     const data = await res.json();
     return data.tides.map(t => ({
       time: new Date(t.time),
+      height_m: t.height_m,
       type: t.type
     }));
   } catch (err) {
@@ -106,48 +114,84 @@ async function loadTides() {
   }
 }
 
-function renderTideChart(tides) {
-  const labels = tides.map(t => t.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-  const values = tides.map(t => t.type === 'high' ? 1 : 0); // 1 for high, 0 for low
+function renderTideChart(tides, selectedDateStr) {
+  const selectedDate = new Date(selectedDateStr);
+  const start = new Date(selectedDate);
+  const end = new Date(start);
+  end.setDate(end.getDate() + 1);
 
-  if (chartInstances['tideChart']) chartInstances['tideChart'].destroy();
+  const dayTides = tides
+    .filter(t => t.time >= start && t.time < end)
+    .sort((a, b) => a.time - b.time);
 
-  const ctx = document.getElementById('tideChart').getContext('2d');
-  chartInstances['tideChart'] = new Chart(ctx, {
-    type: 'line',
+  if (dayTides.length === 0) return;
+
+  // Generate interpolated data every 15 minutes
+  const interpolated = [];
+  const stepMs = 15 * 60 * 1000;
+
+  for (let i = 0; i < dayTides.length - 1; i++) {
+    const t1 = dayTides[i];
+    const t2 = dayTides[i + 1];
+
+    const time1 = t1.time.getTime();
+    const time2 = t2.time.getTime();
+    const duration = time2 - time1;
+
+    for (let t = time1; t <= time2; t += stepMs) {
+      const phase = (t - time1) / duration; // 0 to 1
+      const smoothHeight = sineInterp(t1.height_m, t2.height_m, phase);
+      interpolated.push({
+        time: new Date(t),
+        height: smoothHeight
+      });
+    }
+  }
+
+  const labels = interpolated.map(p =>
+    p.time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+  );
+  const values = interpolated.map(p => p.height);
+
+  if (chartInstances["tideChart"]) chartInstances["tideChart"].destroy();
+  const ctx = document.getElementById("tideChart").getContext("2d");
+
+  chartInstances["tideChart"] = new Chart(ctx, {
+    type: "line",
     data: {
       labels,
-      datasets: [{
-        label: 'Tide',
-        data: values,
-        tension: 0.3,
-        fill: true,
-        pointRadius: 6,
-        pointHoverRadius: 8,
-        pointBackgroundColor: values.map(v => v === 1 ? '#2196f3' : '#ffc107'),
-        borderColor: '#999',
-        backgroundColor: 'rgba(33, 150, 243, 0.2)',
-        stepped: true
-      }]
+      datasets: [
+        {
+          label: "Tide Height (m)",
+          data: values,
+          borderColor: "#4fc3f7",
+          backgroundColor: "rgba(33, 150, 243, 0.2)",
+          tension: 0.4,
+          fill: true
+        }
+      ]
     },
     options: {
-      responsive: true,
-      plugins: {
-        legend: { display: false }
-      },
       scales: {
         y: {
-          min: -0.1,
-          max: 1.1,
-          ticks: {
-            callback: value => value === 1 ? 'High' : value === 0 ? 'Low' : '',
-            stepSize: 1
+          title: {
+            display: true,
+            text: "Height (m)"
           }
         }
+      },
+      plugins: {
+        legend: { display: false }
       }
     }
   });
 }
+
+// Sinusoidal interpolation for tidal approximation
+function sineInterp(a, b, t) {
+  return a + (b - a) * (0.5 - 0.5 * Math.cos(t * Math.PI));
+}
+
 
 function renderDayCharts(hourly) {
   const labels = hourly.map(h => h.date.getHours() + ':00');
@@ -233,7 +277,7 @@ function drawChart(canvasId, labels, datasets, axisOptions) {
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadWeather();
-  const tides = await loadTides();
-  renderTideChart(tides);
+  cachedTides = await loadTides();
+  const todayStr = new Date().toISOString().split("T")[0];
+  renderTideChart(cachedTides, todayStr);
 });
-
