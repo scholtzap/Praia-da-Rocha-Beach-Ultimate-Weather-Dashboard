@@ -5,7 +5,8 @@ const fetch = require("node-fetch");
 const API_KEY = process.env.OWM_API_KEY;
 const LAT = -33.9509;
 const LON = 18.3774;
-const URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${LAT}&lon=${LON}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
+//const URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${LAT}&lon=${LON}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
+const URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${LAT}&lon=${LON}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
 
 async function run() {
   const res = await fetch(URL);
