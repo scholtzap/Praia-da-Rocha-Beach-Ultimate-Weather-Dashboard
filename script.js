@@ -40,6 +40,12 @@ function calculateFrisbeeScore(h) {
   const uv = h.uvi;
   const humidity = h.humidity;
 
+  const hour = h.date.getHours();
+  const sunrise = h.sunrise ? new Date(h.sunrise * 1000).getHours() : 6;
+  const sunset = h.sunset ? new Date(h.sunset * 1000).getHours() : 19;
+  const isDaylight = hour >= sunrise && hour <= sunset;
+  if (!isDaylight) return 0;
+
   score += wind < 5 ? 2 : wind < 10 ? 10 : wind < 20 ? 8 : wind < 30 ? 5 : 2;
   score += rain === 0 ? 10 : rain < 0.5 ? 7 : rain < 1 ? 5 : 2;
   score += clouds < 10 ? 4 : clouds < 70 ? 10 : 5;
