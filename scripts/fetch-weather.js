@@ -6,7 +6,7 @@ const API_KEY = process.env.OWM_API_KEY;
 const LAT = -33.9509;
 const LON = 18.3774;
 //const URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${LAT}&lon=${LON}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
-const URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${LAT}&lon=${LON}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
+const URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${LAT}&lon=${LON}&units=metric&appid=${API_KEY}`;
 
 async function run() {
   const res = await fetch(URL);
@@ -15,25 +15,18 @@ async function run() {
     process.exit(1);
   }
 
-  const data = await res.json();
-  const { hourly, current, daily } = data;
+    const data = await res.json();
+    const hourly = data.list.map(h => ({
+    dt: h.dt,
+    temp: h.main.temp,
+    wind_speed: h.wind.speed,
+    clouds: h.clouds.all,
+    pop: h.pop || 0,
+    rain_mm: h.rain?.["3h"] || 0,
+    humidity: h.main.humidity
+    }));
 
-  const enriched = hourly.map(h => {
-    const matchedDay = daily.find(d => {
-      const date = new Date(h.dt * 1000).toISOString().split("T")[0];
-      return new Date(d.dt * 1000).toISOString().split("T")[0] === date;
-    });
-
-    return {
-      ...h,
-      rain_mm: h.rain?.["1h"] || 0,
-      sunrise: matchedDay?.sunrise,
-      sunset: matchedDay?.sunset
-    };
-  });
-
-  const output = { hourly: enriched };
-  fs.writeFileSync("data/weather.json", JSON.stringify(output, null, 2));
+    fs.writeFileSync("data/weather.json", JSON.stringify({ hourly }, null, 2));
   console.log("✅ Weather data written to data/weather.json");
 }
 
