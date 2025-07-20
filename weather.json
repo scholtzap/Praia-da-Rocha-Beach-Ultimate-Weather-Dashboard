@@ -1,0 +1,100 @@
+{
+  "hourly": [
+    {
+      "dt": 1753026704,
+      "temp": 24,
+      "wind_speed": 12,
+      "clouds": 40,
+      "uvi": 4,
+      "pop": 0.0
+    },
+    {
+      "dt": 1753030304,
+      "temp": 25,
+      "wind_speed": 13,
+      "clouds": 43,
+      "uvi": 5,
+      "pop": 0.1
+    },
+    {
+      "dt": 1753033904,
+      "temp": 26,
+      "wind_speed": 14,
+      "clouds": 46,
+      "uvi": 6,
+      "pop": 0.2
+    },
+    {
+      "dt": 1753037504,
+      "temp": 24,
+      "wind_speed": 15,
+      "clouds": 49,
+      "uvi": 4,
+      "pop": 0.0
+    },
+    {
+      "dt": 1753041104,
+      "temp": 25,
+      "wind_speed": 16,
+      "clouds": 52,
+      "uvi": 5,
+      "pop": 0.1
+    },
+    {
+      "dt": 1753044704,
+      "temp": 26,
+      "wind_speed": 12,
+      "clouds": 55,
+      "uvi": 6,
+      "pop": 0.2
+    },
+    {
+      "dt": 1753048304,
+      "temp": 24,
+      "wind_speed": 13,
+      "clouds": 58,
+      "uvi": 4,
+      "pop": 0.0
+    },
+    {
+      "dt": 1753051904,
+      "temp": 25,
+      "wind_speed": 14,
+      "clouds": 41,
+      "uvi": 5,
+      "pop": 0.1
+    },
+    {
+      "dt": 1753055504,
+      "temp": 26,
+      "wind_speed": 15,
+      "clouds": 44,
+      "uvi": 6,
+      "pop": 0.2
+    },
+    {
+      "dt": 1753059104,
+      "temp": 24,
+      "wind_speed": 16,
+      "clouds": 47,
+      "uvi": 4,
+      "pop": 0.0
+    },
+    {
+      "dt": 1753062704,
+      "temp": 25,
+      "wind_speed": 12,
+      "clouds": 50,
+      "uvi": 5,
+      "pop": 0.1
+    },
+    {
+      "dt": 1753066304,
+      "temp": 26,
+      "wind_speed": 13,
+      "clouds": 53,
+      "uvi": 6,
+      "pop": 0.2
+    }
+  ]
+}
