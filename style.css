@@ -1,0 +1,70 @@
+/* Reset and base styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f9;
+  color: #333;
+  line-height: 1.5;
+}
+
+header {
+  background: linear-gradient(to right, #2193b0, #6dd5ed);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.score {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.webcam iframe {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+section {
+  padding: 1.5rem;
+  margin: 1rem auto;
+  max-width: 900px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+h2 {
+  margin-top: 0;
+  color: #005b8f;
+}
+
+#forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.forecast-hour {
+  background: #eaf7ff;
+  padding: 0.5rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+@media (max-width: 600px) {
+  .score {
+    font-size: 2.2rem;
+  }
+}
