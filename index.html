@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <h1>Clifton 4th Beach Frisbee Weather</h1>
+    <h1>Clifton Beach Frisbee Weather</h1>
     <div class="score" id="current-score">Loading...</div>
     <p id="current-summary"></p>
   </header>
@@ -23,23 +23,6 @@
     ></iframe>
   </section>
   
-  <h2 id="loading-text">Loading...</h2>
-  
-  <div class="card">
-    <h3>Today's Summary</h3>
-    <div id="today-summary"></div>
-  </div>
-  
-  <div class="card">
-    <h3>Select Day</h3>
-    <div id="day-selector" class="day-selector"></div>
-  </div>
-  
-  <div class="card">
-    <h3>Hourly Forecast</h3>
-    <div id="hourly-forecast" class="hourly-container"></div>
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <section class="card">
@@ -55,16 +38,6 @@
   <section class="card">
     <h3>Rainfall & Cloud Cover</h3>
     <canvas id="rainCloudChart" height="200"></canvas>
-  </section>
-
-  <section id="forecast-section">
-    <h2>Hourly Forecast</h2>
-    <div id="forecast-grid"></div>
-  </section>
-
-  <section id="daily-summary">
-    <h2>Today's Summary</h2>
-    <div id="summary-content"></div>
   </section>
 
   <section class="windy-map">
