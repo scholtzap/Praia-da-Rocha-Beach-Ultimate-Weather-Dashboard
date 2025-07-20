@@ -1,5 +1,8 @@
 name: Fetch Tide Data
 
+env:
+  STORMGLASS_API_KEY: ${{ secrets.STORMGLASS_API_KEY }}
+
 on:
   schedule:
     - cron: '0 2 * * *'  # Every day at 4am SAST (2am UTC)
