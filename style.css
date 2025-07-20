@@ -36,7 +36,8 @@ section {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-h2, h3 {
+h1, h2, h3 {
+  text-align: center;
   margin-top: 0;
   color: #90caf9;
 }
@@ -86,6 +87,8 @@ h2, h3 {
 
 /* Day selector */
 .day-selector {
+  justify-content: center;
+  text-align: center;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -94,6 +97,7 @@ h2, h3 {
 }
 
 .day-button {
+  text-align: center;
   padding: 6px 12px;
   border: none;
   border-radius: 20px;
@@ -130,4 +134,42 @@ footer {
   .score {
     font-size: 2.2rem;
   }
+}
+
+.dual-iframe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.dual-iframe .iframe-container {
+  flex: 1 1 48%;
+  min-width: 300px;
+}
+
+.whatsapp-button {
+  display: inline-block;
+  padding: 14px 24px;
+  background-color: #128c7e; /* WhatsApp brand green */
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border: 2px solid #0b5e4a;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-button:hover {
+  background-color: #0b5e4a;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+section.whatsapp-cta {
+  background-color: #e0f7ef;
+  border-left: 6px solid #25d366;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
