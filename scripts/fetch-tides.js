@@ -1,48 +1,55 @@
 const fs = require("fs");
 const fetch = require("node-fetch");
-const cheerio = require("cheerio");
 
-const URL = "https://www.tide-forecast.com/locations/Cape-Town-South-Africa/tides/latest";
+const API_KEY = process.env.STORMGLASS_API_KEY;
+const LAT = -33.9258;
+const LON = 18.4232;
+const FILE = "data/tides.json";
 
 async function run() {
-  const res = await fetch(URL);
-  const html = await res.text();
-  const $ = cheerio.load(html);
+  const end = new Date();
+  const start = new Date();
+  end.setDate(end.getDate() + 5); // 5-day forecast
 
-  const tides = [];
-  const year = new Date().getFullYear(); // add current year
+  const isoStart = start.toISOString();
+  const isoEnd = end.toISOString();
 
-  $('table.tide-table tbody tr').each((i, row) => {
-    const cells = $(row).find("td");
-    if (cells.length >= 4) {
-      const dayText = $(cells[0]).text().trim(); // e.g. 'Sun 21 Jul'
-      const timeText = $(cells[1]).text().trim(); // e.g. '3:46am'
-      const heightText = $(cells[2]).text().trim(); // e.g. '1.52m'
-      const typeText = $(cells[3]).text().toLowerCase();
+  const url = `https://api.stormglass.io/v2/tide/extremes/point?lat=${LAT}&lng=${LON}&start=${isoStart}&end=${isoEnd}`;
 
-      // Parse height
-      const heightMatch = heightText.match(/([\d.]+)/);
-      const height_m = heightMatch ? parseFloat(heightMatch[1]) : null;
-
-      // Compose a full datetime string (e.g. '21 Jul 2025 03:46')
-      const [_, day, month] = dayText.split(" "); // e.g. '21' 'Jul'
-      const dateStr = `${day} ${month} ${year} ${timeText}`;
-      const date = new Date(`${dateStr} GMT+2`);
-
-      const type = typeText.includes("high") ? "high" : "low";
-
-      if (!isNaN(date.getTime()) && height_m !== null) {
-        tides.push({
-          time: date.toISOString(),
-          height_m,
-          type
-        });
-      }
+  const res = await fetch(url, {
+    headers: {
+      Authorization: API_KEY
     }
   });
 
-  fs.writeFileSync("data/tides.json", JSON.stringify({ tides }, null, 2));
-  console.log(`✅ ${tides.length} tide entries written to data/tides.json`);
+  if (!res.ok) {
+    console.error("❌ Failed to fetch tides:", res.status, await res.text());
+    process.exit(1);
+  }
+
+  const data = await res.json();
+
+  const newTides = data.data.map(t => ({
+    time: t.time,
+    height_m: t.height,
+    type: t.type // "high" or "low"
+  }));
+
+  let existing = [];
+  try {
+    existing = JSON.parse(fs.readFileSync(FILE, "utf8")).tides || [];
+  } catch (e) {
+    existing = [];
+  }
+
+  // Deduplicate by ISO timestamp and type
+  const map = new Map(existing.map(t => [t.time + "-" + t.type, t]));
+  newTides.forEach(t => map.set(t.time + "-" + t.type, t));
+
+  const combined = Array.from(map.values()).sort((a, b) => new Date(a.time) - new Date(b.time));
+
+  fs.writeFileSync(FILE, JSON.stringify({ tides: combined }, null, 2));
+  console.log(`✅ Appended and saved ${newTides.length} tide entries to ${FILE}`);
 }
 
 run();
