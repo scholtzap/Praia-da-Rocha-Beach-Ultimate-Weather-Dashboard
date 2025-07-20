@@ -161,15 +161,17 @@ function renderTideChart(tides, selectedDateStr) {
     data: {
       labels,
       datasets: [
-        {
-          label: "Tide Height (m)",
-          data: values,
-          borderColor: "#4fc3f7",
-          backgroundColor: "rgba(33, 150, 243, 0.2)",
-          tension: 0.4,
-          fill: true
-        }
-      ]
+      {
+        label: "Tide Height (m)",
+        data: values,
+        borderColor: "#4fc3f7",
+        backgroundColor: "rgba(33, 150, 243, 0.2)",
+        tension: 0.4,
+        fill: true,
+        pointRadius: 0,
+        pointHoverRadius: 0,
+      }
+    ]
     },
     options: {
       scales: {
