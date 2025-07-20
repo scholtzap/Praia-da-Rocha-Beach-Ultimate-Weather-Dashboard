@@ -2,42 +2,47 @@ const fs = require("fs");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
 
-const URL = "https://www.windfinder.com/tide/cape_town_sea_point";
+const URL = "https://www.tide-forecast.com/locations/Cape-Town-South-Africa/tides/latest";
 
 async function run() {
   const res = await fetch(URL);
   const html = await res.text();
-
   const $ = cheerio.load(html);
+
   const tides = [];
+  const year = new Date().getFullYear(); // add current year
 
-  $(".tide-day").each((i, el) => {
-    const day = $(el).find(".tide-day__header").text().trim();
-    $(el)
-      .find(".tide-day__tide-list .tide-day__tide-item")
-      .each((_, item) => {
-        const timeText = $(item).find(".tide-day__tide-time").text().trim();
-        const heightText = $(item).find(".tide-day__tide-height").text().trim();
-        const type = $(item).find(".tide-day__tide-icon").attr("class").includes("high") ? "high" : "low";
+  $('table.tide-table tbody tr').each((i, row) => {
+    const cells = $(row).find("td");
+    if (cells.length >= 4) {
+      const dayText = $(cells[0]).text().trim(); // e.g. 'Sun 21 Jul'
+      const timeText = $(cells[1]).text().trim(); // e.g. '3:46am'
+      const heightText = $(cells[2]).text().trim(); // e.g. '1.52m'
+      const typeText = $(cells[3]).text().toLowerCase();
 
-        const timeStr = `${day} ${timeText}`;
-        const date = new Date(`${timeStr} GMT+2`);
+      // Parse height
+      const heightMatch = heightText.match(/([\d.]+)/);
+      const height_m = heightMatch ? parseFloat(heightMatch[1]) : null;
 
-        const heightMatch = heightText.match(/([\d.]+)/);
-        const height = heightMatch ? parseFloat(heightMatch[1]) : null;
+      // Compose a full datetime string (e.g. '21 Jul 2025 03:46')
+      const [_, day, month] = dayText.split(" "); // e.g. '21' 'Jul'
+      const dateStr = `${day} ${month} ${year} ${timeText}`;
+      const date = new Date(`${dateStr} GMT+2`);
 
-        if (!isNaN(date.getTime()) && height !== null) {
-          tides.push({
-            time: date.toISOString(),
-            height_m: height,
-            type
-          });
-        }
-      });
+      const type = typeText.includes("high") ? "high" : "low";
+
+      if (!isNaN(date.getTime()) && height_m !== null) {
+        tides.push({
+          time: date.toISOString(),
+          height_m,
+          type
+        });
+      }
+    }
   });
 
   fs.writeFileSync("data/tides.json", JSON.stringify({ tides }, null, 2));
-  console.log("✅ Tides written to data/tides.json");
+  console.log(`✅ ${tides.length} tide entries written to data/tides.json`);
 }
 
 run();

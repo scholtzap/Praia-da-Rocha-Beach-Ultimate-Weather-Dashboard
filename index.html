@@ -9,19 +9,29 @@
 <body>
   <header>
     <h1>Clifton Beach Frisbee Weather</h1>
-    <div class="score" id="current-score">Loading...</div>
     <p id="current-summary"></p>
   </header>
 
-  <section class="webcam">
+<section class="card dual-iframe">
+  <div class="iframe-container">
     <iframe
       width="100%"
-      height="315"
+      height="300"
       src="https://www.youtube.com/embed/live_stream?channel=UCLmKcWr9EjhgrlivvJQovOQ&autoplay=1&mute=1"
       frameborder="0"
       allowfullscreen
     ></iframe>
-  </section>
+  </div>
+
+  <div class="iframe-container">
+    <iframe
+      width="100%"
+      height="300"
+      src="https://embed.windy.com/embed2.html?lat=-33.957&lon=18.377&detailLat=-33.957&detailLon=18.377&width=650&height=450&zoom=11"
+      frameborder="0"
+    ></iframe>
+  </div>
+</section>
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -50,13 +60,14 @@
   <canvas id="tideChart" height="120"></canvas>
   </section>
 
-  <section class="windy-map">
-    <h2>Wind Map</h2>
-    <iframe width="100%" height="450" src="https://embed.windy.com/embed2.html?lat=-33.957&lon=18.377&detailLat=-33.957&detailLon=18.377&width=650&height=450&zoom=11" frameborder="0"></iframe>
-  </section>
-
   <footer>
-    <p>Data updates hourly via GitHub Actions</p>
+    <section class="card">
+      <h3>Join the WhatsApp Group</h3>
+      <p>Use the link below to request access to our group:</p>
+      <a class="whatsapp-button" href="https://forms.gle/7MwBQK9ARXqpTNgq7" target="_blank">
+        📲 Request Access via Google Form
+      </a>
+    </section>
   </footer>
 
   <script src="script.js"></script>
