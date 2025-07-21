@@ -95,7 +95,9 @@ function renderDayCarousel(dayGroups) {
 
   if (buttons.length > 0) {
     buttons[0].classList.add("selected-day");
-    buttons[0].click(); // Also trigger click to load weather + tides
+    const firstDateKey = Object.keys(dayGroups)[0];
+    renderDayCharts(dayGroups[firstDateKey]);
+    renderTideChart(cachedTides, firstDateKey);
   }
 }
 
@@ -120,9 +122,19 @@ function renderTideChart(tides, selectedDateStr) {
   const end = new Date(start);
   end.setDate(end.getDate() + 1);
 
-  const dayTides = tides
-    .filter(t => t.time >= start && t.time < end)
-    .sort((a, b) => a.time - b.time);
+  const extendedTides = [...tides].sort((a, b) => a.time - b.time);
+
+  // Get surrounding points for interpolation
+  const firstBefore = extendedTides.slice().reverse().find(t => t.time < start);
+  const firstAfter = extendedTides.find(t => t.time >= end);
+
+  // Select core day tides
+  const dayTides = extendedTides.filter(t => t.time >= start && t.time < end);
+
+  // Add edge points if found
+  if (firstBefore) dayTides.unshift(firstBefore);
+  if (firstAfter) dayTides.push(firstAfter);
+
 
   if (dayTides.length === 0) return;
 
@@ -148,10 +160,10 @@ function renderTideChart(tides, selectedDateStr) {
     }
   }
 
-  const labels = interpolated.map(p =>
-    p.time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-  );
-  const values = interpolated.map(p => p.height);
+  const values = interpolated.map(p => ({
+    x: p.time,      // Date object
+    y: p.height     // Tide height
+  }));
 
   if (chartInstances["tideChart"]) chartInstances["tideChart"].destroy();
   const ctx = document.getElementById("tideChart").getContext("2d");
@@ -159,22 +171,42 @@ function renderTideChart(tides, selectedDateStr) {
   chartInstances["tideChart"] = new Chart(ctx, {
     type: "line",
     data: {
-      labels,
       datasets: [
-      {
-        label: "Tide Height (m)",
-        data: values,
-        borderColor: "#4fc3f7",
-        backgroundColor: "rgba(33, 150, 243, 0.2)",
-        tension: 0.4,
-        fill: true,
-        pointRadius: 0,
-        pointHoverRadius: 0,
-      }
-    ]
+        {
+          label: "Tide Height (m)",
+          data: values, // now {x: Date, y: Number}
+          borderColor: "#4fc3f7",
+          backgroundColor: "rgba(33, 150, 243, 0.2)",
+          tension: 0.4,
+          fill: true,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          spanGaps: true
+        }
+      ]
     },
     options: {
       scales: {
+        x: {
+          type: 'time',
+          time: {
+            unit: 'hour',
+            displayFormats: {
+              hour: 'HH:mm'
+            },
+            tooltipFormat: 'HH:mm'
+          },
+          title: {
+            display: true,
+            text: 'Time'
+          },
+          ticks: {
+            source: 'auto',
+            autoSkip: true,
+            maxRotation: 0,
+            minRotation: 0
+          }
+        },
         y: {
           title: {
             display: true,
@@ -186,6 +218,7 @@ function renderTideChart(tides, selectedDateStr) {
         legend: { display: false }
       }
     }
+
   });
 }
 
