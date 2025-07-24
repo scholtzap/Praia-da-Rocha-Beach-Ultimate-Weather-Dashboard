@@ -2,12 +2,11 @@ name: Fetch Busyness Data
 
 on:
   schedule:
-    - cron: "0 6 * * *"  # Daily at 08:00 SAST
+    - cron: "0 2 * * *"  # Daily at 08:00 SAST
   workflow_dispatch:
 
 jobs:
   fetch-busyness:
-    # runs-on: ubuntu-22.04  # Optional: use this if Ubuntu 24.04 gives issues
     runs-on: ubuntu-latest
 
     steps:
