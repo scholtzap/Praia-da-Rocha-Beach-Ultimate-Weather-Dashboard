@@ -32,7 +32,7 @@ jobs:
         run: npm install puppeteer@latest
 
       - name: Run Puppeteer scraper
-        run: node fetch-busyness.js
+        run: node scripts/fetch-busyness.js
 
       - name: Commit and push updated data
         run: |
