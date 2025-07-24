@@ -83,7 +83,8 @@ function renderDayCarousel(dayGroups) {
       btn.classList.add("selected-day");
 
       renderDayCharts(entries);
-      renderTideChart(cachedTides, dateKey); // ← now properly invoked on click
+      renderTideChart(cachedTides, dateKey);
+      loadBusynessChart(dateKey);
     };
 
     container.appendChild(btn);
@@ -98,6 +99,7 @@ function renderDayCarousel(dayGroups) {
     const firstDateKey = Object.keys(dayGroups)[0];
     renderDayCharts(dayGroups[firstDateKey]);
     renderTideChart(cachedTides, firstDateKey);
+    loadBusynessChart(firstDateKey);
   }
 }
 
@@ -318,3 +320,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   const todayStr = new Date().toISOString().split("T")[0];
   renderTideChart(cachedTides, todayStr);
 });
+
+async function loadBusynessChart(dateKey) {
+  try {
+    const res = await fetch("data/busyness.json");
+    const busynessData = await res.json();
+
+    const weekday = new Date(dateKey).toLocaleDateString("en-ZA", { weekday: "long" }).toLowerCase();
+    const values = (busynessData.data[weekday] || []).map((val, hour) => ({
+      x: new Date(`${dateKey}T${hour.toString().padStart(2, "0")}:00:00`),
+      y: val
+    }));
+
+    if (chartInstances["busynessChart"]) chartInstances["busynessChart"].destroy();
+    const ctx = document.getElementById("busynessChart").getContext("2d");
+
+    chartInstances["busynessChart"] = new Chart(ctx, {
+      type: "bar",
+      data: { datasets: [{ label: "Busyness (%)", data: values, backgroundColor: "#ffc107" }] },
+      options: {
+        scales: {
+          x: { type: "time", time: { unit: "hour", displayFormats: { hour: "HH:mm" } } },
+          y: { min: 0, max: 100, title: { display: true, text: "Busyness (%)" } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+  } catch (err) {
+    console.error("Busyness chart failed:", err);
+  }
+}
