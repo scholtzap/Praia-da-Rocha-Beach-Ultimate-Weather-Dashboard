@@ -10,11 +10,13 @@ async function run() {
   const page = await browser.newPage();
 
   try {
+    // Go to Google Maps search page
     await page.goto(`https://www.google.com/maps/search/${encodeURIComponent(TARGET_PLACE)}`, {
       waitUntil: "networkidle2",
       timeout: 30000
     });
 
+    // Wait for the Popular Times chart to appear
     await page.waitForSelector('[aria-label^="Popular times"]', { timeout: 15000 });
 
     const data = await page.evaluate(() => {
@@ -22,16 +24,24 @@ async function run() {
       const result = {};
 
       sections.forEach(section => {
-        const day = section.getAttribute("aria-label").match(/Popular times on (\w+)/i)?.[1];
+        const dayMatch = section.getAttribute("aria-label").match(/Popular times on (\w+)/i);
+        if (!dayMatch) return;
+
+        const day = dayMatch[1].toLowerCase();
         const bars = Array.from(section.querySelectorAll('rect[height]'));
+
         const values = bars.map(bar => parseInt(bar.getAttribute("height")));
-        if (day && values.length > 0) {
-          result[day.toLowerCase()] = values;
+        if (values.length > 0) {
+          result[day] = values;
         }
       });
 
       return result;
     });
+
+    if (Object.keys(data).length === 0) {
+      throw new Error("Popular times data not found — layout may have changed.");
+    }
 
     const today = new Date().toISOString().split("T")[0];
     const output = { updated: today, data };
@@ -40,13 +50,13 @@ async function run() {
     fs.writeFileSync("data/busyness.json", JSON.stringify(output, null, 2));
 
     console.log("✅ busyness.json written successfully.");
-    console.log("📊 Sample data preview:");
+    console.log("📊 Sample preview:");
     Object.entries(data).forEach(([day, hours]) => {
-      console.log(`  ${day}: ${hours.slice(8, 13).join(", ")} ...`);
+      console.log(`  ${day}: ${hours.slice(9, 14).join(", ")} ...`);
     });
 
   } catch (err) {
-    console.error("❌ Scraper error:", err.message);
+    console.error("❌ Error while scraping:", err.message);
     process.exit(1);
   } finally {
     await browser.close();
