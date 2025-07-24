@@ -15,9 +15,9 @@ async function run() {
     process.exit(1);
   }
 
-  const newData = await res.json();
+  const apiData = await res.json();
 
-  const newHourly = newData.list.map(h => ({
+  const newHourly = apiData.list.map(h => ({
     dt: h.dt,
     temp: h.main.temp,
     wind_speed: h.wind.speed,
@@ -27,18 +27,27 @@ async function run() {
     humidity: h.main.humidity
   }));
 
-  let combined = [];
+  // Load existing data
+  let existing = { hourly: [] };
   try {
-    const existing = JSON.parse(fs.readFileSync(FILE, "utf8"));
-    const existingMap = new Map(existing.hourly.map(h => [h.dt, h]));
-    newHourly.forEach(h => existingMap.set(h.dt, h)); // overwrites existing or appends new
-    combined = Array.from(existingMap.values()).sort((a, b) => a.dt - b.dt);
+    existing = JSON.parse(fs.readFileSync(FILE, "utf8"));
   } catch (e) {
-    combined = newHourly;
+    console.warn("No existing data or failed to parse. Starting fresh.");
   }
 
-  fs.writeFileSync(FILE, JSON.stringify({ hourly: combined }, null, 2));
-  console.log("✅ Appended and saved weather data to data/weather.json");
+  // Map old data by dt
+  const existingMap = new Map(existing.hourly.map(h => [h.dt, h]));
+
+  // Overwrite or insert with new data
+  newHourly.forEach(h => {
+    existingMap.set(h.dt, h); // replace or add
+  });
+
+  // Sort by dt ascending
+  const merged = Array.from(existingMap.values()).sort((a, b) => a.dt - b.dt);
+
+  fs.writeFileSync(FILE, JSON.stringify({ hourly: merged }, null, 2));
+  console.log(`✅ Updated ${newHourly.length} entries and preserved past data`);
 }
 
 run();
