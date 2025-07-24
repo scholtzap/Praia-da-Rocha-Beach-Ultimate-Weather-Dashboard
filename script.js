@@ -246,6 +246,7 @@ function renderDayCharts(hourly) {
   ], {
     y: {
       min: Math.min(...temp, 0),
+      title: {display: true, text: 'Temperature (°C)'},
       beginAtZero: true
     },
     y1: {
@@ -253,6 +254,7 @@ function renderDayCharts(hourly) {
       max: 10,
       position: 'right',
       grid: { drawOnChartArea: false },
+      title: {display: true, text: 'UV Index'},
       ticks: { stepSize: 1 }
     }
   });
@@ -263,8 +265,8 @@ function renderDayCharts(hourly) {
     { label: 'Wind (kph)', data: wind, yAxisID: 'y', fill: true, tension: 0.3 },
     { label: 'Humidity (%)', data: humidity, yAxisID: 'y1', fill: false, tension: 0.3 }
   ], {
-    y: { min: 0, max: windMax },
-    y1: { min: 0, max: 100 }
+    y: { min: 0, title: {display: true, text: 'Wind Speed (km/h)'}, max: windMax },
+    y1: { min: 0, title: {display: true, text: 'Humidity (%)'}, max: 100 }
   });
 
   const rainMax = Math.max(5, Math.ceil(Math.max(...rain))); // Default 5mm, or more if needed
@@ -273,8 +275,8 @@ function renderDayCharts(hourly) {
     { label: 'Rain (mm)', data: rain, yAxisID: 'y', fill: true, tension: 0.3 },
     { label: 'Cloud Cover (%)', data: clouds, yAxisID: 'y1', fill: false, tension: 0.3 }
   ], {
-    y: { min: 0, max: rainMax },
-    y1: { min: 0, max: 100 }
+    y: { min: 0, title: {display: true, text: 'Rainfall (mm)'}, max: rainMax },
+    y1: { min: 0, title: {display: true, text: 'Cloud Cover (%)'}, max: 100 }
   });
 }
 
