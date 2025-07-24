@@ -34,7 +34,7 @@ jobs:
       - name: Run Puppeteer scraper
         run: |
           set -e
-          node fetch-busyness.js
+          node scripts/fetch-busyness.js
 
       - name: Debug: Check file output
         run: |
