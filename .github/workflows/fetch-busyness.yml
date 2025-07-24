@@ -1,0 +1,42 @@
+name: Fetch Busyness Data
+
+on:
+  schedule:
+    - cron: "0 1 * * *"  # Run daily at 06:00 UTC (08:00 South Africa time)
+  workflow_dispatch:      # Allow manual triggering
+
+jobs:
+  fetch-busyness:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Puppeteer dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 libxi6 \
+            libxtst6 libnss3 libxrandr2 libasound2 libatk1.0-0 \
+            libatk-bridge2.0-0 libcups2 libdbus-1-3 libdrm2 libgbm1 \
+            libgtk-3-0 libxss1 lsb-release xdg-utils wget
+
+      - name: Install dependencies
+        run: npm install puppeteer@latest
+
+      - name: Run Puppeteer scraper
+        run: node fetch-busyness.js
+
+      - name: Commit and push updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/busyness.json
+          git commit -m "🤖 Update busyness data" || echo "No changes to commit"
+          git push
