@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://scholtzap.github.io/Clifton-Beach-Frisbee-Weather-Dashboard/sitemap.xml
