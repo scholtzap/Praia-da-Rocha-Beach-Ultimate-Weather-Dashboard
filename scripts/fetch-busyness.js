@@ -1,7 +1,7 @@
 const fs = require("fs");
 const puppeteer = require("puppeteer");
 
-const TARGET_PLACE = "Clifton 4th Beach, Cape Town";
+const TARGET_PLACE = "Clifton 3rd Beach, Cape Town";
 
 async function run() {
   console.log("🚀 Starting busyness scrape for:", TARGET_PLACE);
@@ -16,24 +16,29 @@ async function run() {
       timeout: 30000
     });
 
-    // Wait for the Popular Times chart to appear
-    await page.waitForSelector('[aria-label^="Popular times"]', { timeout: 15000 });
+    // Wait for Popular Times blocks to load
+    await page.waitForSelector('div[aria-label^="Popular times on"]', { timeout: 15000 });
 
     const data = await page.evaluate(() => {
-      const sections = Array.from(document.querySelectorAll('[aria-label^="Popular times"]'));
       const result = {};
+      const elements = Array.from(document.querySelectorAll('div[aria-label^="Popular times on"]'));
 
-      sections.forEach(section => {
-        const dayMatch = section.getAttribute("aria-label").match(/Popular times on (\w+)/i);
-        if (!dayMatch) return;
+      elements.forEach(el => {
+        const label = el.getAttribute("aria-label");
 
-        const day = dayMatch[1].toLowerCase();
-        const bars = Array.from(section.querySelectorAll('rect[height]'));
+        // e.g. "Popular times on Saturday at 1 PM is 96% busy"
+        const match = label.match(/Popular times on (\w+) at (\d+)(?:\s?([AP]M))? is (\d+)% busy/i);
+        if (!match) return;
 
-        const values = bars.map(bar => parseInt(bar.getAttribute("height")));
-        if (values.length > 0) {
-          result[day] = values;
-        }
+        const [_, day, hourStr, ampm, percentStr] = match;
+
+        let hour = parseInt(hourStr, 10);
+        if (ampm?.toUpperCase() === "PM" && hour !== 12) hour += 12;
+        if (ampm?.toUpperCase() === "AM" && hour === 12) hour = 0;
+
+        const weekday = day.toLowerCase();
+        if (!result[weekday]) result[weekday] = Array(24).fill(null);
+        result[weekday][hour] = parseInt(percentStr, 10);
       });
 
       return result;
@@ -52,7 +57,7 @@ async function run() {
     console.log("✅ busyness.json written successfully.");
     console.log("📊 Sample preview:");
     Object.entries(data).forEach(([day, hours]) => {
-      console.log(`  ${day}: ${hours.slice(9, 14).join(", ")} ...`);
+      console.log(`  ${day}:`, hours.map(v => v ?? "-").slice(9, 14).join(", "), "...");
     });
 
   } catch (err) {
