@@ -35,13 +35,13 @@ jobs:
           set -e
           node scripts/fetch-busyness.js
 
-      - name: Debug: Check file output
-        run: |
-          echo "🗂️ data/ directory:"
-          ls -lh data/ || echo "❌ data/ folder missing"
+      # - name: Debug: Check file output
+      #   run: |
+      #     echo "🗂️ data/ directory:"
+      #     ls -lh data/ || echo "❌ data/ folder missing"
 
-          echo "📄 Contents of busyness.json:"
-          cat data/busyness.json || echo "❌ busyness.json missing"
+      #     echo "📄 Contents of busyness.json:"
+      #     cat data/busyness.json || echo "❌ busyness.json missing"
 
       - name: Commit and push updated data
         run: |
@@ -54,3 +54,5 @@ jobs:
           else
             echo "❌ Skipping commit — busyness.json not found"
           fi
+
+          
