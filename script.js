@@ -56,14 +56,20 @@ function calculateFrisbeeScore(h) {
   const isDaylight = hour >= sunrise && hour <= sunset;
   if (!isDaylight) return 0;
 
-  score += wind < 5 ? 2 : wind < 10 ? 10 : wind < 20 ? 8 : wind < 30 ? 5 : 2;
-  score += rain === 0 ? 10 : rain < 0.5 ? 7 : rain < 1 ? 5 : 2;
-  score += clouds < 10 ? 4 : clouds < 70 ? 10 : 5;
-  // score += uv < 3 ? 4 : uv <= 6 ? 10 : 6; // UVI not available from current OpenWeather API.
-  score += temp < 15 ? 4 : temp <= 28 ? 10 : 6;
-  score += humidity < 100 ? 8 : 5;
+  score += wind < 10 ? 10 : wind < 15 ? 8 : wind < 20 ? 6 : wind < 25 ? 4 : wind < 30 ? 2 : 0;
+  score += rain === 0 ? 10 : rain < 0.5 ? 5 : rain < 1 ? 2 : 0;
+  // score += clouds < 10 ? 4 : clouds < 70 ? 10 : 5;
+  // score += uv < 3 ? 4 : uv <= 6 ? 10 : 6; // UVI not available from current OpenWeather API. *add one to division if added back in
+  score += temp <= 2 ? 0 : temp <= 8 ? 2 : temp <= 12 ? 4 : temp <= 25 ? 10 : temp <= 30 ? 6 : temp <= 35 ? 4 : temp <= 40 ? 2 : 0;
+  score += humidity < 80 ? 5 : 3; // Only counts 0.5 towards score compared to the rest
 
-  return Math.round(score / 6);
+  score = Math.round(score / 3.5); // Normalize to 0-10 scale
+
+  if (wind > 30 || rain > 1 || temp > 37 ) {
+    score = 0; // Extreme conditions
+  }
+
+  return score
 }
 
 function renderDayCarousel(dayGroups) {
