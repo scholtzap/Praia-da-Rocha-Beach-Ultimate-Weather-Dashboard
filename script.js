@@ -124,6 +124,39 @@ async function loadTides() {
   }
 }
 
+function renderBusynessChart(day) {
+  fetch("data/busyness.json")
+    .then((res) => res.json())
+    .then((json) => {
+      const hours = Array.from({ length: 24 }, (_, i) => i);
+      const values = json.data[day.toLowerCase()] || [];
+
+      const ctx = document.getElementById("busynessChart").getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: hours.map(h => `${h}:00`),
+          datasets: [{
+            label: "Busyness (%)",
+            data: values,
+            borderColor: "rgba(255, 99, 132, 1)",
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, max: 100 },
+            x: { title: { display: true, text: "Hour of Day" } }
+          }
+        }
+      });
+    });
+}
+
+
 function renderTideChart(tides, selectedDateStr) {
   const selectedDate = new Date(selectedDateStr);
   const start = new Date(selectedDate);
@@ -327,32 +360,55 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderTideChart(cachedTides, todayStr);
 });
 
-async function loadBusynessChart(dateKey) {
-  try {
-    const res = await fetch("data/busyness.json");
-    const busynessData = await res.json();
+let cachedBusyness = null;
 
-    const weekday = new Date(dateKey).toLocaleDateString("en-ZA", { weekday: "long" }).toLowerCase();
-    const values = (busynessData.data[weekday] || []).map((val, hour) => ({
-      x: new Date(`${dateKey}T${hour.toString().padStart(2, "0")}:00:00`),
-      y: val
-    }));
-
-    if (chartInstances["busynessChart"]) chartInstances["busynessChart"].destroy();
-    const ctx = document.getElementById("busynessChart").getContext("2d");
-
-    chartInstances["busynessChart"] = new Chart(ctx, {
-      type: "bar",
-      data: { datasets: [{ label: "Busyness (%)", data: values, backgroundColor: "#ffc107" }] },
-      options: {
-        scales: {
-          x: { type: "time", time: { unit: "hour", displayFormats: { hour: "HH:mm" } } },
-          y: { min: 0, max: 100, title: { display: true, text: "Busyness (%)" } }
-        },
-        plugins: { legend: { display: false } }
-      }
-    });
-  } catch (err) {
-    console.error("Busyness chart failed:", err);
+async function loadBusynessData() {
+  if (!cachedBusyness) {
+    try {
+      const res = await fetch("data/busyness.json");
+      cachedBusyness = await res.json();
+    } catch (err) {
+      console.error("Failed to load busyness data:", err);
+    }
   }
+  return cachedBusyness;
+}
+
+async function loadBusynessChart(dateKey) {
+  const data = await loadBusynessData();
+  if (!data || !data.data) return;
+
+  const dayName = new Date(dateKey).toLocaleDateString("en-ZA", { weekday: "long" }).toLowerCase();
+  const dayData = data.data[dayName];
+  if (!dayData) return;
+
+  const chartId = "busynessChart";
+  const ctx = document.getElementById(chartId).getContext("2d");
+
+  const chartData = {
+    labels: Array.from({ length: 24 }, (_, i) => `${i}:00`),
+    datasets: [{
+      label: `Busyness - ${dayName.charAt(0).toUpperCase() + dayName.slice(1)}`,
+      data: dayData,
+      backgroundColor: "rgba(255, 193, 7, 0.5)",
+      borderColor: "rgba(255, 193, 7, 1)",
+      borderWidth: 1,
+      fill: true,
+    }]
+  };
+
+  if (chartInstances[chartId]) chartInstances[chartId].destroy();
+  chartInstances[chartId] = new Chart(ctx, {
+    type: "bar",
+    data: chartData,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          title: { display: true, text: "Estimated Popularity (%)" }
+        }
+      }
+    }
+  });
 }
