@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://scholtzap.github.io/Clifton-Beach-Frisbee-Weather-Dashboard/sitemap.xml
+Sitemap: https://scholtzap.github.io/Praia-da-Rocha-Beach-Ultimate-Weather-Dashboard/sitemap.xml
