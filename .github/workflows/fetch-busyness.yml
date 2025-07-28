@@ -45,3 +45,5 @@ jobs:
             git push
           else
             echo "❌ Skipping commit — busyness.json not found"
+          fi
+
