@@ -28,11 +28,10 @@ jobs:
           GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
         run: python scripts/fetch-busyness.py
 
-      - name: Debug: Check file output
+      - name: "Debug: Check file output"
         run: |
           echo "🗂️ data/ directory:"
           ls -lh data/ || echo "❌ data/ folder missing"
-
           echo "📄 Contents of busyness.json:"
           cat data/busyness.json || echo "❌ busyness.json missing"
 
