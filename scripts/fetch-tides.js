@@ -2,8 +2,8 @@ const fs = require("fs");
 const fetch = require("node-fetch");
 
 const API_KEY = process.env.STORMGLASS_API_KEY;
-const LAT = -33.9258;
-const LON = 18.4232;
+const LAT = 37.1173117;
+const LON = -8.5428763; // Praia da Rocha, Portugal
 const FILE = "data/tides.json";
 
 async function run() {

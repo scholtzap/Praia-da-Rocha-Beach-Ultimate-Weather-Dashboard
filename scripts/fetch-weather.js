@@ -2,8 +2,8 @@ const fs = require("fs");
 const fetch = require("node-fetch");
 
 const API_KEY = process.env.OWM_API_KEY;
-const LAT = -33.9509;
-const LON = 18.3774;
+const LAT = 37.1173117;
+const LON = -8.5428763; // Praia da Rocha, Portugal
 
 const URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${LAT}&lon=${LON}&units=metric&appid=${API_KEY}`;
 const FILE = "data/weather.json";
