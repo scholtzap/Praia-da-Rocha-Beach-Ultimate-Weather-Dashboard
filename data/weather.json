@@ -938,57 +938,57 @@
     },
     {
       "dt": 1754168400,
-      "temp": 24.46,
-      "wind_speed": 4.33,
-      "clouds": 0,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 56
-    },
-    {
-      "dt": 1754179200,
-      "temp": 22.96,
-      "wind_speed": 2.69,
-      "clouds": 0,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 60
-    },
-    {
-      "dt": 1754190000,
-      "temp": 23.36,
-      "wind_speed": 3.76,
-      "clouds": 0,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 55
-    },
-    {
-      "dt": 1754200800,
-      "temp": 24.36,
-      "wind_speed": 2.23,
+      "temp": 25.59,
+      "wind_speed": 4.34,
       "clouds": 0,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 49
     },
     {
-      "dt": 1754211600,
-      "temp": 26.11,
-      "wind_speed": 2.03,
+      "dt": 1754179200,
+      "temp": 24.26,
+      "wind_speed": 2.75,
       "clouds": 0,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 56
+      "humidity": 58
     },
     {
-      "dt": 1754222400,
-      "temp": 28.61,
-      "wind_speed": 4.85,
+      "dt": 1754190000,
+      "temp": 23,
+      "wind_speed": 3.76,
+      "clouds": 0,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 58
+    },
+    {
+      "dt": 1754200800,
+      "temp": 23.92,
+      "wind_speed": 1.97,
       "clouds": 0,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 52
+    },
+    {
+      "dt": 1754211600,
+      "temp": 27.65,
+      "wind_speed": 2.23,
+      "clouds": 0,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 50
+    },
+    {
+      "dt": 1754222400,
+      "temp": 28.08,
+      "wind_speed": 4.36,
+      "clouds": 0,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 55
     },
     {
       "dt": 1754233200,
@@ -1286,6 +1286,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 44
+    },
+    {
+      "dt": 1754589600,
+      "temp": 25.21,
+      "wind_speed": 7.08,
+      "clouds": 0,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 53
     }
   ]
 }
