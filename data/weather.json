@@ -1928,57 +1928,57 @@
     },
     {
       "dt": 1755356400,
-      "temp": 31.56,
-      "wind_speed": 3.29,
-      "clouds": 27,
+      "temp": 31.22,
+      "wind_speed": 3.61,
+      "clouds": 14,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 41
+    },
+    {
+      "dt": 1755367200,
+      "temp": 29.97,
+      "wind_speed": 3.83,
+      "clouds": 42,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 43
     },
     {
-      "dt": 1755367200,
-      "temp": 30.04,
-      "wind_speed": 3.84,
-      "clouds": 64,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 40
-    },
-    {
       "dt": 1755378000,
-      "temp": 24.92,
-      "wind_speed": 4.13,
-      "clouds": 90,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 48
-    },
-    {
-      "dt": 1755388800,
-      "temp": 24.02,
-      "wind_speed": 3.4,
-      "clouds": 61,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 48
-    },
-    {
-      "dt": 1755399600,
-      "temp": 23.64,
-      "wind_speed": 3.36,
-      "clouds": 2,
+      "temp": 24.91,
+      "wind_speed": 4.1,
+      "clouds": 83,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 50
     },
     {
-      "dt": 1755410400,
-      "temp": 23.74,
-      "wind_speed": 3.34,
-      "clouds": 4,
+      "dt": 1755388800,
+      "temp": 23.24,
+      "wind_speed": 3.4,
+      "clouds": 54,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 48
+      "humidity": 51
+    },
+    {
+      "dt": 1755399600,
+      "temp": 22.68,
+      "wind_speed": 3.37,
+      "clouds": 40,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 52
+    },
+    {
+      "dt": 1755410400,
+      "temp": 22.92,
+      "wind_speed": 3.04,
+      "clouds": 67,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 50
     },
     {
       "dt": 1755421200,
@@ -2276,6 +2276,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 63
+    },
+    {
+      "dt": 1755777600,
+      "temp": 28.99,
+      "wind_speed": 3.3,
+      "clouds": 20,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 49
     }
   ]
 }
