@@ -4970,57 +4970,57 @@
     },
     {
       "dt": 1759006800,
-      "temp": 20.19,
-      "wind_speed": 4.97,
-      "clouds": 98,
+      "temp": 19.9,
+      "wind_speed": 5.18,
+      "clouds": 92,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 84
+      "humidity": 87
     },
     {
       "dt": 1759017600,
-      "temp": 18.93,
-      "wind_speed": 5.74,
-      "clouds": 100,
+      "temp": 19.35,
+      "wind_speed": 6.39,
+      "clouds": 89,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 90
+      "humidity": 88
     },
     {
       "dt": 1759028400,
-      "temp": 18.56,
-      "wind_speed": 7.14,
-      "clouds": 74,
-      "pop": 0,
-      "rain_mm": 0,
+      "temp": 18.72,
+      "wind_speed": 7.21,
+      "clouds": 81,
+      "pop": 0.2,
+      "rain_mm": 0.14,
       "humidity": 89
     },
     {
       "dt": 1759039200,
-      "temp": 18.45,
-      "wind_speed": 8.03,
-      "clouds": 77,
-      "pop": 0.32,
-      "rain_mm": 0.21,
-      "humidity": 87
+      "temp": 18.66,
+      "wind_speed": 8.09,
+      "clouds": 82,
+      "pop": 0.39,
+      "rain_mm": 0.26,
+      "humidity": 85
     },
     {
       "dt": 1759050000,
-      "temp": 19.25,
-      "wind_speed": 7.75,
-      "clouds": 95,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 84
+      "temp": 18.98,
+      "wind_speed": 7.57,
+      "clouds": 91,
+      "pop": 0.39,
+      "rain_mm": 0.13,
+      "humidity": 86
     },
     {
       "dt": 1759060800,
-      "temp": 21.31,
-      "wind_speed": 9.67,
-      "clouds": 85,
-      "pop": 0.29,
-      "rain_mm": 0.12,
-      "humidity": 72
+      "temp": 21.44,
+      "wind_speed": 9.48,
+      "clouds": 83,
+      "pop": 0.34,
+      "rain_mm": 0.13,
+      "humidity": 70
     },
     {
       "dt": 1759071600,
@@ -5318,6 +5318,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 68
+    },
+    {
+      "dt": 1759428000,
+      "temp": 22.65,
+      "wind_speed": 2.65,
+      "clouds": 10,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 71
     }
   ]
 }
