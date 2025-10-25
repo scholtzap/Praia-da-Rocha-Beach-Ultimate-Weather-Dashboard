@@ -6986,57 +6986,57 @@
     },
     {
       "dt": 1761426000,
-      "temp": 20.73,
-      "wind_speed": 2.11,
-      "clouds": 90,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 82
-    },
-    {
-      "dt": 1761436800,
-      "temp": 20.24,
-      "wind_speed": 2.77,
-      "clouds": 93,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 82
-    },
-    {
-      "dt": 1761447600,
-      "temp": 19.98,
-      "wind_speed": 2.93,
-      "clouds": 100,
+      "temp": 21.05,
+      "wind_speed": 2.46,
+      "clouds": 83,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 85
     },
     {
-      "dt": 1761458400,
-      "temp": 19.56,
-      "wind_speed": 1.89,
+      "dt": 1761436800,
+      "temp": 20.92,
+      "wind_speed": 3.06,
+      "clouds": 89,
+      "pop": 0.2,
+      "rain_mm": 0.14,
+      "humidity": 81
+    },
+    {
+      "dt": 1761447600,
+      "temp": 20,
+      "wind_speed": 2.84,
       "clouds": 100,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 84
+    },
+    {
+      "dt": 1761458400,
+      "temp": 19.26,
+      "wind_speed": 1.79,
+      "clouds": 99,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 88
     },
     {
       "dt": 1761469200,
-      "temp": 20.81,
-      "wind_speed": 1.48,
-      "clouds": 96,
+      "temp": 20.39,
+      "wind_speed": 1.57,
+      "clouds": 86,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 83
+      "humidity": 84
     },
     {
       "dt": 1761480000,
-      "temp": 21.35,
-      "wind_speed": 2.11,
-      "clouds": 98,
-      "pop": 0.2,
-      "rain_mm": 0.36,
-      "humidity": 81
+      "temp": 21.57,
+      "wind_speed": 2.91,
+      "clouds": 93,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 80
     },
     {
       "dt": 1761490800,
@@ -7334,6 +7334,15 @@
       "pop": 1,
       "rain_mm": 1.41,
       "humidity": 80
+    },
+    {
+      "dt": 1761847200,
+      "temp": 17.7,
+      "wind_speed": 5.27,
+      "clouds": 100,
+      "pop": 1,
+      "rain_mm": 1.35,
+      "humidity": 87
     }
   ]
 }
