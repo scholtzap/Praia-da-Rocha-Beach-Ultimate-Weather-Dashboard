@@ -1,0 +1,36 @@
+# Development Dockerfile with live reload capabilities
+FROM node:18-alpine
+
+# Install Python for fetch scripts
+RUN apk add --no-cache python3 py3-pip git nginx
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install Node dependencies
+RUN npm install
+
+# Copy application files
+COPY . .
+
+# Build HTML for specified location
+ARG LOCATION=clifton
+ENV LOCATION=${LOCATION}
+RUN node scripts/build-html.js
+
+# Copy nginx configuration
+COPY docker/nginx.conf /etc/nginx/http.d/default.conf
+
+# Copy built files to nginx directory
+RUN cp index.html /usr/share/nginx/html/ && \
+    cp style.css /usr/share/nginx/html/ && \
+    cp script.js /usr/share/nginx/html/ && \
+    cp .nojekyll /usr/share/nginx/html/ && \
+    cp Robots.txt /usr/share/nginx/html/ && \
+    mkdir -p /usr/share/nginx/html/data
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

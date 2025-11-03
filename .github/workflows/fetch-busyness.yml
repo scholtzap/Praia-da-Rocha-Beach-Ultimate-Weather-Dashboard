@@ -2,48 +2,43 @@ name: Fetch Busyness Data
 
 on:
   schedule:
-    - cron: "0 2 * * *"  # Runs daily at 08:00 SAST
+    - cron: '0 */6 * * *'  # Every 6 hours
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   fetch-busyness:
     runs-on: ubuntu-latest
+    env:
+      LOCATION: ${{ vars.LOCATION || 'clifton' }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.x'
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
-          pip install git+https://github.com/m-wrzr/populartimes.git
+          pip install pyyaml
+          git clone https://github.com/m-wrzr/populartimes.git
+          cd populartimes
+          pip install -r requirements.txt
+          cd ..
 
-      - name: Run Python scraper
-        env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+      - name: Fetch busyness data
         run: python scripts/fetch-busyness.py
 
-      - name: "Debug: Check file output"
+      - name: Commit and push
         run: |
-          echo "🗂️ data/ directory:"
-          ls -lh data/ || echo "❌ data/ folder missing"
-          echo "📄 Contents of busyness.json:"
-          cat data/busyness.json || echo "❌ busyness.json missing"
-
-      - name: Commit and push updated data
-        run: |
-          if [ -f data/busyness.json ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add data/busyness.json
-            git commit -m "🤖 Update busyness data" || echo "No changes to commit"
-            git push
-          else
-            echo "❌ Skipping commit — busyness.json not found"
-          fi
-
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/busyness.json
+          git commit -m "Auto-update busyness data for ${{ env.LOCATION }}" || echo "No changes to commit"
+          git push

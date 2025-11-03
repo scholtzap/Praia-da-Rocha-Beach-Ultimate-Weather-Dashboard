@@ -1,0 +1,50 @@
+locations:
+  clifton:
+    name: "Clifton Beach Frisbee"
+    title: "Clifton Beach Frisbee Weather"
+    google_place_id: "ChIJA3eAg_5mzB0RYoOZkIYVZ4I"  # Clifton Beach, South Africa
+    coordinates:
+      weather_lat: -33.9509
+      weather_lon: 18.3774
+      tides_lat: -33.9258
+      tides_lon: 18.4232
+      windy_lat: -33.957
+      windy_lon: 18.377
+    youtube_url: "https://www.youtube.com/embed/UCLmKcWr9EjhgrlivvJQovOQ/live?autoplay=1&mute=1"
+    windy_embed: "https://embed.windy.com/embed2.html?lat=-33.957&lon=18.377&detailLat=-33.957&detailLon=18.377&width=650&height=450&zoom=11"
+    github_repo: "Clifton-Beach-Frisbee-Weather-Dashboard"
+    github_user: "scholtzap"
+    share_urls:
+      twitter: "https://twitter.com/intent/tweet?url=https%3A%2F%2Fscholtzap.github.io%2FClifton-Beach-Frisbee-Weather-Dashboard%2F&text=Check%20out%20this%20Clifton%20Frisbee%20Weather%20Dashboard!"
+      facebook: "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fscholtzap.github.io%2FClifton-Beach-Frisbee-Weather-Dashboard%2F"
+      linkedin: "https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fscholtzap.github.io%2FClifton-Beach-Frisbee-Weather-Dashboard%2F"
+    whatsapp_form: "https://forms.gle/7MwBQK9ARXqpTNgq7"
+    additional_embeds: []
+
+  praia:
+    name: "Praia da Rocha Beach Ultimate"
+    title: "Praia da Rocha Beach Ultimate Weather"
+    google_place_id: "ChIJ_Tltkx0pGw0RRP66hPgM7e0"  # Viewpoint of the Three Castles (near Praia da Rocha)
+    coordinates:
+      weather_lat: 37.1173117
+      weather_lon: -8.5428763
+      tides_lat: 37.1173117
+      tides_lon: -8.5428763
+      windy_lat: 37.1197
+      windy_lon: -8.5382
+    youtube_url: "https://www.youtube.com/embed/UCgc94Z6At-5cWGkI_Z2vr5g/live?autoplay=1&mute=1"
+    windy_embed: "https://embed.windy.com/embed2.html?lat=37.1197&lon=-8.5382&detailLat=37.1197&detailLon=-8.5382&width=650&height=450&zoom=11"
+    windy_webcam_id: "1570400523"
+    beachcam_url: "https://beachcam.meo.pt/livecams/praia-da-rocha/"
+    github_repo: "Praia-da-Rocha-Beach-Ultimate-Weather-Dashboard"
+    github_user: "scholtzap"
+    share_urls:
+      twitter: "https://twitter.com/intent/tweet?url=https%3A%2F%2Fscholtzap.github.io%2FPraia-da-Rocha-Beach-Ultimate-Weather-Dashboard%2F&text=Check%20out%20this%20Praia-da-Rocha%20Ultimate%20Weather%20Dashboard!"
+      facebook: "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fscholtzap.github.io%2FPraia-da-Rocha-Beach-Ultimate-Weather-Dashboard%2F"
+      linkedin: "https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fscholtzap.github.io%2FPraia-da-Rocha-Beach-Ultimate-Weather-Dashboard%2F"
+    whatsapp_form: null
+    additional_embeds:
+      - type: "windy_webcam"
+        id: "1570400523"
+      - type: "beachcam"
+        url: "https://beachcam.meo.pt/livecams/praia-da-rocha/"

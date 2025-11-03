@@ -1,12 +1,29 @@
 const fs = require("fs");
 const fetch = require("node-fetch");
+const yaml = require("js-yaml");
 
+// Read LOCATION environment variable (default to 'clifton')
+const LOCATION = process.env.LOCATION || "clifton";
 const API_KEY = process.env.STORMGLASS_API_KEY;
-const LAT = 37.1173117;
-const LON = -8.5428763; // Praia da Rocha, Portugal
+
+// Load configuration
+const configFile = fs.readFileSync("config.yml", "utf8");
+const config = yaml.load(configFile);
+
+const locationConfig = config.locations[LOCATION];
+if (!locationConfig) {
+  console.error(`❌ Location "${LOCATION}" not found in config.yml`);
+  process.exit(1);
+}
+
+const LAT = locationConfig.coordinates.tides_lat;
+const LON = locationConfig.coordinates.tides_lon;
 const FILE = "data/tides.json";
 
 async function run() {
+  console.log(`🌊 Fetching tide data for ${locationConfig.name} (${LOCATION})`);
+  console.log(`   Coordinates: ${LAT}, ${LON}`);
+
   const end = new Date();
   const start = new Date();
   end.setDate(end.getDate() + 5); // 5-day forecast

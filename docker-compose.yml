@@ -1,0 +1,50 @@
+services:
+  # Clifton Beach Dashboard
+  clifton:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        LOCATION: clifton
+    container_name: beach-dashboard-clifton
+    ports:
+      - "8080:80"
+    volumes:
+      # Mount location-specific data directory
+      - ./data/clifton:/usr/share/nginx/html/data:ro
+    environment:
+      - LOCATION=clifton
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Praia da Rocha Dashboard
+  praia:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        LOCATION: praia
+    container_name: beach-dashboard-praia
+    ports:
+      - "8081:80"
+    volumes:
+      # Mount location-specific data directory
+      - ./data/praia:/usr/share/nginx/html/data:ro
+    environment:
+      - LOCATION=praia
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  default:
+    name: beach-dashboard-network
