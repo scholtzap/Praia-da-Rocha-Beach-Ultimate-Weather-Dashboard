@@ -28,9 +28,7 @@ jobs:
         run: |
           pip install pyyaml
           git clone https://github.com/m-wrzr/populartimes.git
-          cd populartimes
-          pip install -r requirements.txt
-          cd ..
+          pip install ./populartimes
 
       - name: Fetch busyness data
         run: python scripts/fetch-busyness.py
