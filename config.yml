@@ -10,7 +10,7 @@ locations:
       tides_lon: 18.4232
       windy_lat: -33.957
       windy_lon: 18.377
-    youtube_url: "https://www.youtube.com/embed/UCLmKcWr9EjhgrlivvJQovOQ/live?autoplay=1&mute=1"
+    youtube_url: "https://www.youtube.com/embed/5-31MVekskY?autoplay=1&mute=1"
     windy_embed: "https://embed.windy.com/embed2.html?lat=-33.957&lon=18.377&detailLat=-33.957&detailLon=18.377&width=650&height=450&zoom=11"
     github_repo: "Clifton-Beach-Frisbee-Weather-Dashboard"
     github_user: "scholtzap"
@@ -32,7 +32,7 @@ locations:
       tides_lon: -8.5428763
       windy_lat: 37.1197
       windy_lon: -8.5382
-    youtube_url: "https://www.youtube.com/embed/UCgc94Z6At-5cWGkI_Z2vr5g/live?autoplay=1&mute=1"
+    youtube_url: "https://www.youtube.com/embed/w7rzgn6WXs8?autoplay=1&mute=1"
     windy_embed: "https://embed.windy.com/embed2.html?lat=37.1197&lon=-8.5382&detailLat=37.1197&detailLon=-8.5382&width=650&height=450&zoom=11"
     windy_webcam_id: "1570400523"
     beachcam_url: "https://beachcam.meo.pt/livecams/praia-da-rocha/"
