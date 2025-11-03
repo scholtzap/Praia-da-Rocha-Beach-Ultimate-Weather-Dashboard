@@ -1,0 +1,51 @@
+services:
+  # Development service with data fetching capabilities
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        LOCATION: ${LOCATION:-clifton}
+    container_name: beach-dashboard-dev
+    ports:
+      - "${PORT:-8080}:80"
+    volumes:
+      # Mount source code for live development
+      - ./scripts:/app/scripts:ro
+      - ./config.yml:/app/config.yml:ro
+      - ./data:/app/data
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./style.css:/usr/share/nginx/html/style.css:ro
+      - ./script.js:/usr/share/nginx/html/script.js:ro
+    environment:
+      - LOCATION=${LOCATION:-clifton}
+      - OWM_API_KEY=${OWM_API_KEY}
+      - STORMGLASS_API_KEY=${STORMGLASS_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GOOGLE_PLACE_ID=${GOOGLE_PLACE_ID}
+    restart: unless-stopped
+    command: nginx -g 'daemon off;'
+
+  # Data fetcher service (runs scripts on demand)
+  fetcher:
+    build:
+      context: .
+      dockerfile: Dockerfile.fetcher
+    container_name: beach-dashboard-fetcher
+    volumes:
+      - ./scripts:/app/scripts:ro
+      - ./config.yml:/app/config.yml:ro
+      - ./data:/app/data
+    environment:
+      - LOCATION=${LOCATION:-clifton}
+      - OWM_API_KEY=${OWM_API_KEY}
+      - STORMGLASS_API_KEY=${STORMGLASS_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GOOGLE_PLACE_ID=${GOOGLE_PLACE_ID}
+    profiles:
+      - tools
+    command: /bin/sh -c "echo 'Fetcher ready. Run docker-compose run fetcher npm run fetch:all'"
+
+networks:
+  default:
+    name: beach-dashboard-dev-network

@@ -10,8 +10,10 @@ async function loadWeather() {
 
     const tzOffsetMs = 2 * 60 * 60 * 1000; // GMT+2
     const now = new Date();
-    const cutoff = new Date(now.getTime() + tzOffsetMs);
-    cutoff.setUTCHours(0, 0, 0, 0); // Start of today in GMT+2
+    // Calculate midnight today in GMT+2, then convert back to UTC for comparison
+    const localNow = new Date(now.getTime() + tzOffsetMs);
+    localNow.setUTCHours(0, 0, 0, 0); // Midnight in GMT+2 timezone
+    const cutoff = new Date(localNow.getTime() - tzOffsetMs); // Convert back to UTC
 
     const futureHourly = weather.hourly
       .map(h => ({ ...h, date: new Date(h.dt * 1000) }))
@@ -295,7 +297,7 @@ function renderDayCharts(hourly) {
       max: 10,
       position: 'right',
       grid: { drawOnChartArea: false },
-      title: {display: true, text: 'UV Index'},
+      title: {display: true, text: 'Playability'},
       ticks: { stepSize: 1 }
     }
   });

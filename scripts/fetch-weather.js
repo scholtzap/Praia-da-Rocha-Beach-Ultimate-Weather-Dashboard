@@ -1,14 +1,31 @@
 const fs = require("fs");
 const fetch = require("node-fetch");
+const yaml = require("js-yaml");
 
+// Read LOCATION environment variable (default to 'clifton')
+const LOCATION = process.env.LOCATION || "clifton";
 const API_KEY = process.env.OWM_API_KEY;
-const LAT = 37.1173117;
-const LON = -8.5428763; // Praia da Rocha, Portugal
+
+// Load configuration
+const configFile = fs.readFileSync("config.yml", "utf8");
+const config = yaml.load(configFile);
+
+const locationConfig = config.locations[LOCATION];
+if (!locationConfig) {
+  console.error(`❌ Location "${LOCATION}" not found in config.yml`);
+  process.exit(1);
+}
+
+const LAT = locationConfig.coordinates.weather_lat;
+const LON = locationConfig.coordinates.weather_lon;
 
 const URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${LAT}&lon=${LON}&units=metric&appid=${API_KEY}`;
 const FILE = "data/weather.json";
 
 async function run() {
+  console.log(`🌍 Fetching weather data for ${locationConfig.name} (${LOCATION})`);
+  console.log(`   Coordinates: ${LAT}, ${LON}`);
+
   const res = await fetch(URL);
   if (!res.ok) {
     console.error("Failed to fetch weather data:", res.status, await res.text());

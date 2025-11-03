@@ -1,0 +1,41 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+DEPLOYMENT.md
+DOCKER.md
+DOCKER_SUMMARY.md
+MIGRATION_SUMMARY.md
+STRUCTURE.txt
+
+# Node
+node_modules
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+.docker
+
+# Old repositories (if present)
+Clifton-Beach-Frisbee-Weather-Dashboard
+Praia-da-Rocha-Beach-Ultimate-Weather-Dashboard
+cape-town-weather-dashboard
+portimao-weather-dashboard
+
+# Claude
+.claude

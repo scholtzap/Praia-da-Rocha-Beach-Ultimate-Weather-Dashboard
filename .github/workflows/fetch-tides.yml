@@ -1,23 +1,22 @@
 name: Fetch Tide Data
 
-env:
-  STORMGLASS_API_KEY: ${{ secrets.STORMGLASS_API_KEY }}
-
 on:
   schedule:
-    - cron: '0 2 * * *'  # Every day at 4am SAST (2am UTC)
+    - cron: '15 6 * * *'  # Daily at 6:15 AM
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  update-tides:
+  fetch-tides:
     runs-on: ubuntu-latest
+    env:
+      LOCATION: ${{ vars.LOCATION || 'clifton' }}
+      STORMGLASS_API_KEY: ${{ secrets.STORMGLASS_API_KEY }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -30,12 +29,10 @@ jobs:
       - name: Fetch tide data
         run: node scripts/fetch-tides.js
 
-      - name: Commit and push updated tide data
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/tides.json
-          git commit -m "Auto-update tides" || echo "No changes to commit"
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:main
+          git commit -m "Auto-update tide data for ${{ env.LOCATION }}" || echo "No changes to commit"
+          git push

@@ -1,30 +1,35 @@
-# Replacement for Puppeteer-based scraper using populartimes library in Python
-
-# Instructions:
-# 1. Install the populartimes library from https://github.com/m-wrzr/populartimes
-#    git clone https://github.com/m-wrzr/populartimes.git
-#    cd populartimes
-#    pip install -r requirements.txt
-# 2. Store your API key and place ID as GitHub secrets:
-#    - GOOGLE_API_KEY
-#    - GOOGLE_PLACE_ID
+# Unified busyness fetcher that reads from config.yml
+# Supports multiple locations via LOCATION environment variable
 
 import json
 import populartimes
 import os
+import yaml
 
-# Load credentials from environment variables (GitHub Actions secrets)
+# Read LOCATION environment variable (default to 'clifton')
+LOCATION = os.getenv("LOCATION", "clifton")
 API_KEY = os.getenv("GOOGLE_API_KEY")
-PLACE_ID = os.getenv("GOOGLE_PLACE_ID")
+
+# Load configuration
+with open("config.yml", "r") as f:
+    config = yaml.safe_load(f)
+
+location_config = config["locations"].get(LOCATION)
+if not location_config:
+    raise ValueError(f'❌ Location "{LOCATION}" not found in config.yml')
+
+# Get place ID from config or environment (environment takes precedence)
+PLACE_ID = os.getenv("GOOGLE_PLACE_ID") or location_config.get("google_place_id")
 
 if not API_KEY:
     raise EnvironmentError("Missing GOOGLE_API_KEY environment variable.")
-if not PLACE_ID:
-    raise EnvironmentError("Missing GOOGLE_PLACE_ID environment variable.")
+if not PLACE_ID or PLACE_ID.startswith("YOUR_"):
+    raise EnvironmentError(f"Missing or invalid GOOGLE_PLACE_ID for location '{LOCATION}'.")
+
+print(f'🚀 Fetching busyness data for {location_config["name"]} ({LOCATION})')
 
 # Fetch popular times data from populartimes
 try:
-    print("🚀 Fetching Popular Times data using populartimes...")
     data = populartimes.get_id(API_KEY, PLACE_ID)
 
     # Create structured output for our app (matching previous Puppeteer output)

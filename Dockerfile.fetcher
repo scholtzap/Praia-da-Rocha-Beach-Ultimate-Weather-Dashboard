@@ -1,0 +1,32 @@
+# Dockerfile for data fetching service
+FROM node:18-alpine
+
+# Install Python and dependencies for fetch scripts
+RUN apk add --no-cache python3 py3-pip git bash
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install Node dependencies
+RUN npm install
+
+# Install Python dependencies for populartimes
+RUN pip install --break-system-packages pyyaml requests && \
+    git clone https://github.com/m-wrzr/populartimes.git /tmp/populartimes && \
+    cd /tmp/populartimes && \
+    pip install --break-system-packages .
+
+# Copy application files
+COPY scripts/ ./scripts/
+COPY config.yml ./
+
+# Create data directory
+RUN mkdir -p data
+
+# Make scripts executable
+RUN chmod +x scripts/*.js scripts/*.py 2>/dev/null || true
+
+# Default command
+CMD ["/bin/sh"]

@@ -1,25 +1,26 @@
 {
-  "name": "clifton-beach-frisbee-weather-dashboard",
+  "name": "beach-ultimate-weather-dashboard",
   "version": "1.0.0",
-  "main": "script.js",
+  "description": "Unified multi-location beach weather dashboard for Ultimate Frisbee",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node scripts/build-html.js",
+    "fetch:weather": "node scripts/fetch-weather.js",
+    "fetch:tides": "node scripts/fetch-tides.js",
+    "fetch:busyness": "python scripts/fetch-busyness.py",
+    "fetch:all": "npm run fetch:weather && npm run fetch:tides && npm run fetch:busyness"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/scholtzap/Clifton-Beach-Frisbee-Weather-Dashboard.git"
-  },
-  "keywords": [],
+  "keywords": [
+    "weather",
+    "dashboard",
+    "beach",
+    "ultimate",
+    "frisbee"
+  ],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/scholtzap/Clifton-Beach-Frisbee-Weather-Dashboard/issues"
-  },
-  "homepage": "https://github.com/scholtzap/Clifton-Beach-Frisbee-Weather-Dashboard#readme",
-  "description": "",
+  "license": "MIT",
   "dependencies": {
-    "cheerio": "^1.1.0",
-    "node-fetch": "^2.7.0",
-    "puppeteer": "^24.15.0"
+    "js-yaml": "^4.1.0",
+    "node-fetch": "^2.7.0"
   }
 }
