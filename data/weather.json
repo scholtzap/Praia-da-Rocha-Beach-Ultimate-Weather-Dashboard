@@ -7742,57 +7742,57 @@
     },
     {
       "dt": 1762333200,
-      "temp": 20.68,
-      "wind_speed": 9.7,
+      "temp": 20.88,
+      "wind_speed": 9.24,
       "clouds": 100,
       "pop": 1,
-      "rain_mm": 8.11,
+      "rain_mm": 7.76,
       "humidity": 87
     },
     {
       "dt": 1762344000,
-      "temp": 19.61,
-      "wind_speed": 9.58,
-      "clouds": 68,
+      "temp": 20.49,
+      "wind_speed": 8.63,
+      "clouds": 77,
       "pop": 1,
-      "rain_mm": 2.04,
-      "humidity": 83
+      "rain_mm": 1.02,
+      "humidity": 82
     },
     {
       "dt": 1762354800,
-      "temp": 19,
-      "wind_speed": 8.99,
-      "clouds": 3,
-      "pop": 0.21,
+      "temp": 19.12,
+      "wind_speed": 8.71,
+      "clouds": 0,
+      "pop": 0.2,
       "rain_mm": 0.12,
-      "humidity": 68
+      "humidity": 69
     },
     {
       "dt": 1762365600,
-      "temp": 16.83,
-      "wind_speed": 9.31,
-      "clouds": 5,
-      "pop": 0.14,
-      "rain_mm": 0,
-      "humidity": 70
+      "temp": 17.38,
+      "wind_speed": 8.81,
+      "clouds": 14,
+      "pop": 0.2,
+      "rain_mm": 0.13,
+      "humidity": 69
     },
     {
       "dt": 1762376400,
-      "temp": 16.25,
-      "wind_speed": 7.96,
-      "clouds": 33,
-      "pop": 0.79,
-      "rain_mm": 0.37,
-      "humidity": 73
+      "temp": 16.57,
+      "wind_speed": 7.46,
+      "clouds": 16,
+      "pop": 0.18,
+      "rain_mm": 0,
+      "humidity": 69
     },
     {
       "dt": 1762387200,
-      "temp": 15.95,
-      "wind_speed": 6.54,
-      "clouds": 38,
-      "pop": 0.84,
-      "rain_mm": 0.39,
-      "humidity": 66
+      "temp": 14.88,
+      "wind_speed": 6.24,
+      "clouds": 24,
+      "pop": 0.38,
+      "rain_mm": 0.41,
+      "humidity": 74
     },
     {
       "dt": 1762398000,
@@ -8090,6 +8090,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 71
+    },
+    {
+      "dt": 1762754400,
+      "temp": 13.99,
+      "wind_speed": 2.57,
+      "clouds": 95,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 77
     }
   ]
 }
