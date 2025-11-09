@@ -8021,12 +8021,12 @@
     },
     {
       "dt": 1762668000,
-      "temp": 13.96,
+      "temp": 13.93,
       "wind_speed": 2.91,
       "clouds": 46,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 81
+      "humidity": 82
     },
     {
       "dt": 1762678800,
@@ -8369,6 +8369,15 @@
       "pop": 1,
       "rain_mm": 3.18,
       "humidity": 81
+    },
+    {
+      "dt": 1763089200,
+      "temp": 16.54,
+      "wind_speed": 8.18,
+      "clouds": 61,
+      "pop": 1,
+      "rain_mm": 0.66,
+      "humidity": 77
     }
   ]
 }
