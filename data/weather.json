@@ -8552,57 +8552,57 @@
     },
     {
       "dt": 1763305200,
-      "temp": 17.44,
-      "wind_speed": 6.53,
-      "clouds": 2,
-      "pop": 0.73,
-      "rain_mm": 0.47,
-      "humidity": 75
+      "temp": 18.85,
+      "wind_speed": 6.86,
+      "clouds": 3,
+      "pop": 0.32,
+      "rain_mm": 0.17,
+      "humidity": 72
     },
     {
       "dt": 1763316000,
-      "temp": 15.64,
-      "wind_speed": 5.52,
-      "clouds": 9,
+      "temp": 17.07,
+      "wind_speed": 6.02,
+      "clouds": 6,
       "pop": 1,
-      "rain_mm": 0.87,
-      "humidity": 81
+      "rain_mm": 1.13,
+      "humidity": 77
     },
     {
       "dt": 1763326800,
-      "temp": 15.71,
-      "wind_speed": 5.65,
-      "clouds": 11,
-      "pop": 0,
-      "rain_mm": 0,
+      "temp": 15.74,
+      "wind_speed": 5.18,
+      "clouds": 10,
+      "pop": 0.2,
+      "rain_mm": 0.17,
       "humidity": 76
     },
     {
       "dt": 1763337600,
-      "temp": 15.16,
-      "wind_speed": 5.69,
-      "clouds": 8,
-      "pop": 0.91,
-      "rain_mm": 0.93,
+      "temp": 15.08,
+      "wind_speed": 4.91,
+      "clouds": 5,
+      "pop": 0.33,
+      "rain_mm": 0.27,
       "humidity": 79
     },
     {
       "dt": 1763348400,
-      "temp": 15.55,
-      "wind_speed": 6.55,
-      "clouds": 75,
+      "temp": 15.98,
+      "wind_speed": 6.9,
+      "clouds": 52,
       "pop": 1,
-      "rain_mm": 1.05,
-      "humidity": 81
+      "rain_mm": 0.9,
+      "humidity": 80
     },
     {
       "dt": 1763359200,
-      "temp": 15.66,
-      "wind_speed": 6.63,
-      "clouds": 60,
+      "temp": 15.68,
+      "wind_speed": 6.37,
+      "clouds": 51,
       "pop": 1,
-      "rain_mm": 1.66,
-      "humidity": 81
+      "rain_mm": 2.08,
+      "humidity": 80
     },
     {
       "dt": 1763370000,
@@ -8900,6 +8900,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 62
+    },
+    {
+      "dt": 1763726400,
+      "temp": 12.82,
+      "wind_speed": 5.97,
+      "clouds": 0,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 40
     }
   ]
 }
