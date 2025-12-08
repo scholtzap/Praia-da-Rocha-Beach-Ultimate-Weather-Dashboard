@@ -10118,57 +10118,57 @@
     },
     {
       "dt": 1765184400,
-      "temp": 15.42,
-      "wind_speed": 3.37,
-      "clouds": 60,
+      "temp": 15.44,
+      "wind_speed": 4.23,
+      "clouds": 54,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 78
     },
     {
       "dt": 1765195200,
-      "temp": 17.19,
-      "wind_speed": 4.65,
-      "clouds": 72,
+      "temp": 16.63,
+      "wind_speed": 4.85,
+      "clouds": 42,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 74
+      "humidity": 76
     },
     {
       "dt": 1765206000,
-      "temp": 17,
-      "wind_speed": 4.4,
-      "clouds": 22,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 75
-    },
-    {
-      "dt": 1765216800,
-      "temp": 15.29,
-      "wind_speed": 2.97,
-      "clouds": 53,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 87
-    },
-    {
-      "dt": 1765227600,
-      "temp": 15.07,
-      "wind_speed": 3.78,
-      "clouds": 81,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 89
-    },
-    {
-      "dt": 1765238400,
-      "temp": 15.29,
-      "wind_speed": 4,
+      "temp": 16.95,
+      "wind_speed": 4.32,
       "clouds": 64,
       "pop": 0,
       "rain_mm": 0,
+      "humidity": 77
+    },
+    {
+      "dt": 1765216800,
+      "temp": 15.24,
+      "wind_speed": 3.24,
+      "clouds": 82,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 88
+    },
+    {
+      "dt": 1765227600,
+      "temp": 15.09,
+      "wind_speed": 3.9,
+      "clouds": 100,
+      "pop": 0,
+      "rain_mm": 0,
       "humidity": 90
+    },
+    {
+      "dt": 1765238400,
+      "temp": 15.12,
+      "wind_speed": 4.33,
+      "clouds": 79,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 91
     },
     {
       "dt": 1765249200,
@@ -10466,6 +10466,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 83
+    },
+    {
+      "dt": 1765605600,
+      "temp": 10.86,
+      "wind_speed": 4,
+      "clouds": 62,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 84
     }
   ]
 }
