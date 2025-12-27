@@ -11486,57 +11486,57 @@
     },
     {
       "dt": 1766826000,
-      "temp": 9.68,
-      "wind_speed": 10.35,
-      "clouds": 97,
-      "pop": 0.98,
-      "rain_mm": 3.4,
-      "humidity": 84
+      "temp": 10.17,
+      "wind_speed": 10.59,
+      "clouds": 96,
+      "pop": 0.88,
+      "rain_mm": 1.47,
+      "humidity": 83
     },
     {
       "dt": 1766836800,
-      "temp": 12.37,
-      "wind_speed": 12.61,
-      "clouds": 100,
+      "temp": 12,
+      "wind_speed": 12.7,
+      "clouds": 97,
       "pop": 1,
-      "rain_mm": 13.79,
-      "humidity": 86
+      "rain_mm": 12.77,
+      "humidity": 85
     },
     {
       "dt": 1766847600,
-      "temp": 13.71,
-      "wind_speed": 9.26,
+      "temp": 13.74,
+      "wind_speed": 5.99,
       "clouds": 100,
       "pop": 1,
-      "rain_mm": 3.4,
+      "rain_mm": 4.01,
       "humidity": 80
     },
     {
       "dt": 1766858400,
-      "temp": 11.91,
-      "wind_speed": 5.63,
-      "clouds": 84,
+      "temp": 12.09,
+      "wind_speed": 6.73,
+      "clouds": 82,
       "pop": 1,
-      "rain_mm": 1.21,
-      "humidity": 80
+      "rain_mm": 2.62,
+      "humidity": 81
     },
     {
       "dt": 1766869200,
-      "temp": 11.81,
-      "wind_speed": 5.58,
-      "clouds": 86,
+      "temp": 11.43,
+      "wind_speed": 5.94,
+      "clouds": 71,
       "pop": 1,
-      "rain_mm": 2.59,
-      "humidity": 79
+      "rain_mm": 2.3,
+      "humidity": 70
     },
     {
       "dt": 1766880000,
-      "temp": 11.95,
-      "wind_speed": 4.52,
-      "clouds": 83,
+      "temp": 10.93,
+      "wind_speed": 4.9,
+      "clouds": 58,
       "pop": 1,
-      "rain_mm": 0.82,
-      "humidity": 70
+      "rain_mm": 1.53,
+      "humidity": 75
     },
     {
       "dt": 1766890800,
@@ -11830,6 +11830,15 @@
       "dt": 1767236400,
       "temp": 9.23,
       "wind_speed": 2.98,
+      "clouds": 0,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 80
+    },
+    {
+      "dt": 1767247200,
+      "temp": 8.7,
+      "wind_speed": 2.77,
       "clouds": 0,
       "pop": 0,
       "rain_mm": 0,
