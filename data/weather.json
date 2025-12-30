@@ -11738,57 +11738,57 @@
     },
     {
       "dt": 1767128400,
-      "temp": 13.21,
-      "wind_speed": 3.35,
-      "clouds": 98,
-      "pop": 0.42,
-      "rain_mm": 0.28,
-      "humidity": 83
+      "temp": 13.39,
+      "wind_speed": 3.8,
+      "clouds": 84,
+      "pop": 0.04,
+      "rain_mm": 0,
+      "humidity": 85
     },
     {
       "dt": 1767139200,
-      "temp": 11.97,
-      "wind_speed": 4.04,
-      "clouds": 97,
-      "pop": 0.37,
-      "rain_mm": 0.16,
-      "humidity": 84
+      "temp": 12.04,
+      "wind_speed": 4.31,
+      "clouds": 71,
+      "pop": 0.35,
+      "rain_mm": 0.29,
+      "humidity": 87
     },
     {
       "dt": 1767150000,
-      "temp": 11.5,
-      "wind_speed": 4.75,
-      "clouds": 100,
-      "pop": 0.99,
-      "rain_mm": 0.87,
-      "humidity": 91
+      "temp": 11.43,
+      "wind_speed": 4.69,
+      "clouds": 99,
+      "pop": 0.48,
+      "rain_mm": 0.33,
+      "humidity": 84
     },
     {
       "dt": 1767160800,
-      "temp": 11.27,
-      "wind_speed": 5.63,
-      "clouds": 100,
-      "pop": 1,
-      "rain_mm": 1.29,
-      "humidity": 91
+      "temp": 11.01,
+      "wind_speed": 4.98,
+      "clouds": 99,
+      "pop": 0.19,
+      "rain_mm": 0,
+      "humidity": 87
     },
     {
       "dt": 1767171600,
-      "temp": 12.09,
-      "wind_speed": 5.54,
+      "temp": 9.87,
+      "wind_speed": 4.94,
       "clouds": 99,
-      "pop": 0.88,
-      "rain_mm": 0.38,
-      "humidity": 91
+      "pop": 0.27,
+      "rain_mm": 0.23,
+      "humidity": 89
     },
     {
       "dt": 1767182400,
-      "temp": 11.7,
-      "wind_speed": 4.55,
-      "clouds": 100,
-      "pop": 0.85,
-      "rain_mm": 0.46,
-      "humidity": 89
+      "temp": 13.03,
+      "wind_speed": 3.6,
+      "clouds": 99,
+      "pop": 0.25,
+      "rain_mm": 0.23,
+      "humidity": 78
     },
     {
       "dt": 1767193200,
@@ -12086,6 +12086,15 @@
       "pop": 1,
       "rain_mm": 0.99,
       "humidity": 84
+    },
+    {
+      "dt": 1767549600,
+      "temp": 13.42,
+      "wind_speed": 7.38,
+      "clouds": 76,
+      "pop": 1,
+      "rain_mm": 0.21,
+      "humidity": 85
     }
   ]
 }
