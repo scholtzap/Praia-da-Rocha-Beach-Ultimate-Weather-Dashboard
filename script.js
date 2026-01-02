@@ -356,6 +356,9 @@ function drawChart(canvasId, labels, datasets, axisOptions) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Update YouTube embed if dynamic search is enabled
+  await updateYouTubeEmbed();
+
   await loadWeather();
   cachedTides = await loadTides();
   const todayStr = new Date().toISOString().split("T")[0];
@@ -413,4 +416,67 @@ async function loadBusynessChart(dateKey) {
       }
     }
   });
+}
+
+// YouTube Live Stream Finder
+async function findYouTubeLiveStream(channelId, titleContains, apiKey) {
+  try {
+    const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`;
+    const response = await fetch(searchUrl);
+    const data = await response.json();
+
+    if (data.error) {
+      console.error('YouTube API error:', data.error);
+      return null;
+    }
+
+    if (!data.items || data.items.length === 0) {
+      console.log('No live streams found on channel');
+      return null;
+    }
+
+    // Find stream matching the title
+    const matchingStream = data.items.find(item =>
+      item.snippet.title.toLowerCase().includes(titleContains.toLowerCase())
+    );
+
+    if (matchingStream) {
+      return matchingStream.id.videoId;
+    }
+
+    console.log('No stream found matching title:', titleContains);
+    return null;
+  } catch (error) {
+    console.error('Error fetching YouTube live stream:', error);
+    return null;
+  }
+}
+
+// Update YouTube iframe with dynamic video ID
+async function updateYouTubeEmbed() {
+  const iframe = document.getElementById('youtube-livestream');
+  if (!iframe) return;
+
+  const youtubeConfig = window.YOUTUBE_SEARCH_CONFIG;
+  if (!youtubeConfig || !youtubeConfig.enabled) return;
+
+  const apiKey = window.YOUTUBE_API_KEY;
+  if (!apiKey) {
+    console.warn('YouTube API key not provided. Using fallback channel URL.');
+    return;
+  }
+
+  const videoId = await findYouTubeLiveStream(
+    youtubeConfig.channel_id,
+    youtubeConfig.title_contains,
+    apiKey
+  );
+
+  if (videoId) {
+    const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+    iframe.src = newSrc;
+    console.log('Updated YouTube embed with video ID:', videoId);
+  } else {
+    console.log('Could not find matching stream, using default channel URL');
+  }
 }
