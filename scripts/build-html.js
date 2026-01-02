@@ -81,6 +81,23 @@ if (loc.whatsapp_form) {
 `;
 }
 
+// Build YouTube search configuration script
+let youtubeConfigScript = "";
+if (loc.youtube_search && loc.youtube_search.enabled) {
+  youtubeConfigScript = `
+<script>
+  // YouTube search configuration
+  window.YOUTUBE_SEARCH_CONFIG = {
+    enabled: true,
+    channel_id: "${loc.youtube_search.channel_id}",
+    title_contains: "${loc.youtube_search.title_contains}"
+  };
+  // YouTube API key (restricted to scholtzap.github.io domain)
+  window.YOUTUBE_API_KEY = "AIzaSyBvjaTTOOBkip2R9IZIm_OXqaEaggN_R6Y";
+</script>
+`;
+}
+
 // Generate the full HTML
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -116,6 +133,7 @@ const html = `<!DOCTYPE html>
   <!-- YouTube Live Stream -->
   <div class="iframe-container">
     <iframe
+      id="youtube-livestream"
       width="100%"
       height="300"
       src="${loc.youtube_url}"
@@ -135,6 +153,7 @@ ${additionalEmbedsHTML}
   </div>
 </section>
 ${beachcamHTML}
+${youtubeConfigScript}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 
