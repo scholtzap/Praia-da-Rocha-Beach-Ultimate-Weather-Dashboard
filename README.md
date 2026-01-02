@@ -72,7 +72,11 @@ locations:
       tides_lon: 18.4232
       windy_lat: -33.957
       windy_lon: 18.377
-    youtube_url: "https://www.youtube.com/embed/..."
+    youtube_url: "https://www.youtube.com/embed/live_stream?channel=CHANNEL_ID&autoplay=1&mute=1"
+    youtube_search:  # Optional: For channels with multiple streams
+      enabled: true
+      channel_id: "CHANNEL_ID"
+      title_contains: "Stream title keywords"
     windy_embed: "https://embed.windy.com/..."
     # ... more settings
 ```
@@ -141,11 +145,19 @@ That's it! The unified codebase will handle the rest.
 
 ```
 beach-ultimate-weather-dashboard/
-├── config.yml                 # Central configuration
+├── config.yml                 # Central configuration for all locations
+├── deploy-all.sh              # 🚀 One-command deployment script
 ├── package.json               # Node dependencies
 ├── index.html                 # Generated (by build script)
 ├── style.css                  # Shared styles
 ├── script.js                  # Shared JavaScript
+├── docker-compose.yml         # Docker configuration for both locations
+├── Dockerfile                 # Production Docker image
+├── Dockerfile.dev             # Development Docker image
+├── Dockerfile.fetcher         # Data fetching Docker image
+├── README.md                  # Main documentation (this file)
+├── DEPLOYMENT.md              # Deployment guide
+├── MULTI-REPO-WORKFLOW.md     # Multi-repository workflow guide
 ├── scripts/
 │   ├── build-html.js         # HTML generator
 │   ├── fetch-weather.js      # Weather data fetcher
@@ -206,6 +218,48 @@ To contribute improvements to the unified codebase:
 3. Make your changes
 4. Test with both locations
 5. Submit a pull request
+
+## Multi-Repository Deployment (Recommended)
+
+This project is designed to deploy as **multiple independent repositories**, one per location. This allows each location to have its own GitHub Pages deployment and automated workflows.
+
+### 🚀 Quick Start: Deploy to Both Repos
+
+The easiest way to deploy changes to all locations:
+
+```bash
+cd /mnt/c/Users/apsch/OneDrive/Documents/github/beach-ultimate-weather-dashboard
+./deploy-all.sh "Your commit message"
+```
+
+This automatically:
+1. Copies updated config to both deployment repos
+2. Builds location-specific HTML for each
+3. Commits and pushes to both repositories
+4. Triggers GitHub Pages deployment for both sites
+
+**Example:**
+```bash
+./deploy-all.sh "Update YouTube embed URLs"
+```
+
+### Repository Setup
+
+The multi-repo structure consists of:
+- **Main source repository** (this repo): Contains shared code and config.yml
+- **Clifton deployment repo** (`/tmp/clifton-deploy`): Deploys to GitHub Pages
+- **Praia deployment repo** (`/tmp/praia-deploy`): Deploys to GitHub Pages
+
+Each deployment repo:
+- Has its own `LOCATION` variable in GitHub settings
+- Runs automated workflows to fetch data
+- Deploys independently via GitHub Pages
+
+### Manual Deployment
+
+For detailed deployment workflows or single-location updates, see:
+- **[MULTI-REPO-WORKFLOW.md](./MULTI-REPO-WORKFLOW.md)** - Complete multi-repo management guide
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - GitHub Pages and Docker deployment guide
 
 ## Docker Deployment
 

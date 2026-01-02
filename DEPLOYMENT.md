@@ -1,10 +1,60 @@
 # Deployment Guide
 
-This guide explains how to deploy the unified Beach Ultimate Weather Dashboard for GitHub Pages deployment.
+This guide explains how to deploy the unified Beach Ultimate Weather Dashboard.
+
+## Overview
+
+The Beach Ultimate Weather Dashboard uses a **multi-repository deployment strategy**:
+- **One source repository** containing shared code and `config.yml`
+- **Separate deployment repositories** for each location (Clifton and Praia)
+- Each deployment repo has its own GitHub Pages site and automated workflows
 
 ## Deployment Options
 
-### Option 1: Deploy to GitHub Pages
+### Option 1: Multi-Repository Deployment (Recommended)
+
+This is the **recommended approach** for managing multiple location dashboards from a single source.
+
+#### 🚀 Quick Deploy to All Locations
+
+```bash
+cd /mnt/c/Users/apsch/OneDrive/Documents/github/beach-ultimate-weather-dashboard
+./deploy-all.sh "Your commit message"
+```
+
+This script:
+1. Copies `config.yml` to `/tmp/clifton-deploy` and `/tmp/praia-deploy`
+2. Builds location-specific `index.html` for each
+3. Commits and pushes changes to both GitHub repositories
+4. Triggers automatic GitHub Pages deployment
+
+**Example:**
+```bash
+./deploy-all.sh "Update YouTube embed URLs"
+```
+
+#### Setup Multi-Repository Deployment
+
+**Prerequisites:**
+- Clone deployment repos to `/tmp/clifton-deploy` and `/tmp/praia-deploy`
+- Each deployment repo configured with GitHub Pages enabled
+- Git authentication configured (Windows Credential Manager or SSH)
+
+**Directory Structure:**
+```
+/mnt/c/Users/apsch/OneDrive/Documents/github/beach-ultimate-weather-dashboard/
+├── config.yml           # Master configuration
+├── deploy-all.sh        # Deployment script
+├── scripts/
+└── ...
+
+/tmp/clifton-deploy/     # Git: scholtzap/Clifton-Beach-Frisbee-Weather-Dashboard
+/tmp/praia-deploy/       # Git: scholtzap/Praia-da-Rocha-Beach-Ultimate-Weather-Dashboard
+```
+
+**For detailed multi-repo workflows, see [MULTI-REPO-WORKFLOW.md](./MULTI-REPO-WORKFLOW.md)**
+
+### Option 2: Single Repository GitHub Pages
 
 This is the primary deployment method for hosting dashboards publicly.
 
@@ -35,7 +85,11 @@ This is the primary deployment method for hosting dashboards publicly.
 
 Your dashboard will be available at: `https://[username].github.io/[repository-name]/`
 
-### Option 2: Deploy with Docker
+**Live Deployments:**
+- Clifton: https://scholtzap.github.io/Clifton-Beach-Frisbee-Weather-Dashboard/
+- Praia: https://scholtzap.github.io/Praia-da-Rocha-Beach-Ultimate-Weather-Dashboard/
+
+### Option 3: Deploy with Docker
 
 For local or self-hosted deployment using Docker containers.
 
@@ -193,6 +247,79 @@ For issues or questions:
 2. Review workflow logs in the Actions tab
 3. Open an issue in the repository
 
+## Common Multi-Repo Deployment Workflows
+
+### Updating YouTube Embed URLs
+
+**Option 1: Static Channel URL** (for channels with single stream):
+```yaml
+youtube_url: "https://www.youtube.com/embed/live_stream?channel=CHANNEL_ID&autoplay=1&mute=1"
+```
+
+**Option 2: Dynamic Stream Finder** (for channels with multiple streams):
+```yaml
+youtube_url: "https://www.youtube.com/embed/live_stream?channel=CHANNEL_ID&autoplay=1&mute=1"
+youtube_search:
+  enabled: true
+  channel_id: "CHANNEL_ID"
+  title_contains: "Stream title keywords"
+```
+
+**Note**: Dynamic search requires a YouTube Data API v3 key in `scripts/build-html.js`. See [MULTI-REPO-WORKFLOW.md](MULTI-REPO-WORKFLOW.md#update-youtube-embed-urls) for setup details.
+
+**Deploy**:
+1. Edit `config.yml` in the main repository
+2. Test locally: `docker-compose up -d`
+3. Deploy: `./deploy-all.sh "Update YouTube embed URLs"`
+
+### Updating Weather Coordinates
+
+1. Edit `config.yml` coordinates for the location
+2. Test locally with Docker
+3. Deploy: `./deploy-all.sh "Update weather coordinates"`
+
+### Updating Shared Assets (CSS/JS)
+
+If you modify `style.css` or `script.js`:
+
+```bash
+# Manual method (if not using deploy-all.sh)
+cd /tmp/clifton-deploy
+cp /path/to/main/style.css .
+cp /path/to/main/script.js .
+git add style.css script.js
+git commit -m "Update styles"
+git push
+
+# Repeat for Praia
+cd /tmp/praia-deploy
+cp /path/to/main/style.css .
+cp /path/to/main/script.js .
+git add style.css script.js
+git commit -m "Update styles"
+git push
+```
+
+### Testing Before Deployment
+
+Always test changes locally before deploying:
+
+```bash
+# 1. Edit config.yml or other files
+
+# 2. Test both locations with Docker
+docker-compose down
+docker-compose build
+docker-compose up -d
+
+# 3. Verify in browser
+# - Clifton: http://localhost:8080
+# - Praia: http://localhost:8081
+
+# 4. If everything looks good, deploy
+./deploy-all.sh "Description of changes"
+```
+
 ## Next Steps
 
 After successful deployment:
@@ -205,3 +332,9 @@ After successful deployment:
 ---
 
 **Remember:** Each repository should have its own `LOCATION` variable set, pointing to the correct section in `config.yml`.
+
+## Documentation
+
+- **[README.md](./README.md)** - Main project documentation
+- **[MULTI-REPO-WORKFLOW.md](./MULTI-REPO-WORKFLOW.md)** - Detailed multi-repository management guide
+- **[docker-quick-start.sh](./docker-quick-start.sh)** - Automated Docker setup script
