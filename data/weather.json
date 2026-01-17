@@ -12998,57 +12998,57 @@
     },
     {
       "dt": 1768640400,
-      "temp": 9.54,
-      "wind_speed": 2.98,
-      "clouds": 86,
+      "temp": 8.84,
+      "wind_speed": 2.73,
+      "clouds": 81,
       "pop": 0.3,
-      "rain_mm": 0.25,
+      "rain_mm": 0.31,
       "humidity": 80
     },
     {
       "dt": 1768651200,
-      "temp": 12.37,
-      "wind_speed": 5.32,
-      "clouds": 99,
-      "pop": 1,
-      "rain_mm": 2.28,
-      "humidity": 68
+      "temp": 10.86,
+      "wind_speed": 4.82,
+      "clouds": 85,
+      "pop": 0.95,
+      "rain_mm": 1.27,
+      "humidity": 71
     },
     {
       "dt": 1768662000,
-      "temp": 12.52,
-      "wind_speed": 5.79,
-      "clouds": 92,
-      "pop": 1,
-      "rain_mm": 2.04,
-      "humidity": 67
+      "temp": 12.48,
+      "wind_speed": 6.09,
+      "clouds": 60,
+      "pop": 0.89,
+      "rain_mm": 0.59,
+      "humidity": 65
     },
     {
       "dt": 1768672800,
-      "temp": 10.55,
-      "wind_speed": 4.86,
-      "clouds": 95,
-      "pop": 1,
-      "rain_mm": 1.64,
-      "humidity": 76
+      "temp": 10.11,
+      "wind_speed": 4.87,
+      "clouds": 82,
+      "pop": 0.87,
+      "rain_mm": 0.88,
+      "humidity": 75
     },
     {
       "dt": 1768683600,
-      "temp": 9.57,
-      "wind_speed": 2.67,
-      "clouds": 99,
+      "temp": 9.17,
+      "wind_speed": 3.16,
+      "clouds": 100,
       "pop": 1,
-      "rain_mm": 1.55,
-      "humidity": 81
+      "rain_mm": 1.01,
+      "humidity": 80
     },
     {
       "dt": 1768694400,
-      "temp": 8.8,
-      "wind_speed": 1.94,
+      "temp": 8.86,
+      "wind_speed": 2.96,
       "clouds": 100,
       "pop": 1,
-      "rain_mm": 1.56,
-      "humidity": 83
+      "rain_mm": 1.04,
+      "humidity": 84
     },
     {
       "dt": 1768705200,
@@ -13346,6 +13346,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 80
+    },
+    {
+      "dt": 1769061600,
+      "temp": 11.76,
+      "wind_speed": 7.63,
+      "clouds": 100,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 72
     }
   ]
 }
