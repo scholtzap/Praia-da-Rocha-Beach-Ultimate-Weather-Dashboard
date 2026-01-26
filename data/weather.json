@@ -13646,57 +13646,57 @@
     },
     {
       "dt": 1769418000,
-      "temp": 14.43,
-      "wind_speed": 7.29,
-      "clouds": 89,
+      "temp": 15.2,
+      "wind_speed": 7.51,
+      "clouds": 84,
       "pop": 1,
-      "rain_mm": 0.41,
+      "rain_mm": 0.45,
       "humidity": 95
     },
     {
       "dt": 1769428800,
-      "temp": 15.47,
-      "wind_speed": 7.75,
-      "clouds": 94,
-      "pop": 0.95,
-      "rain_mm": 0.48,
-      "humidity": 91
+      "temp": 15.76,
+      "wind_speed": 8.14,
+      "clouds": 90,
+      "pop": 1,
+      "rain_mm": 0.59,
+      "humidity": 92
     },
     {
       "dt": 1769439600,
-      "temp": 16.25,
-      "wind_speed": 7.89,
-      "clouds": 93,
+      "temp": 16.27,
+      "wind_speed": 8.31,
+      "clouds": 79,
       "pop": 1,
-      "rain_mm": 0.66,
-      "humidity": 87
+      "rain_mm": 0.88,
+      "humidity": 86
     },
     {
       "dt": 1769450400,
-      "temp": 15.37,
-      "wind_speed": 8.15,
-      "clouds": 96,
-      "pop": 0.99,
-      "rain_mm": 0.21,
-      "humidity": 85
+      "temp": 15.32,
+      "wind_speed": 9.07,
+      "clouds": 89,
+      "pop": 1,
+      "rain_mm": 0.22,
+      "humidity": 86
     },
     {
       "dt": 1769461200,
-      "temp": 14.98,
-      "wind_speed": 10.11,
-      "clouds": 79,
-      "pop": 0.32,
-      "rain_mm": 0.27,
-      "humidity": 87
+      "temp": 14.91,
+      "wind_speed": 9.9,
+      "clouds": 77,
+      "pop": 0.24,
+      "rain_mm": 0.2,
+      "humidity": 85
     },
     {
       "dt": 1769472000,
-      "temp": 15.17,
-      "wind_speed": 12.2,
+      "temp": 15.18,
+      "wind_speed": 12.51,
       "clouds": 80,
       "pop": 0.2,
       "rain_mm": 0.12,
-      "humidity": 84
+      "humidity": 85
     },
     {
       "dt": 1769482800,
@@ -13991,6 +13991,15 @@
       "temp": 11.53,
       "wind_speed": 8.2,
       "clouds": 2,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 68
+    },
+    {
+      "dt": 1769839200,
+      "temp": 11.49,
+      "wind_speed": 6.99,
+      "clouds": 4,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 68
