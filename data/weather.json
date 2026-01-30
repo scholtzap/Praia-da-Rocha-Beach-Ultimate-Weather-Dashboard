@@ -13925,27 +13925,27 @@
     },
     {
       "dt": 1769752800,
-      "temp": 12.89,
+      "temp": 13,
       "wind_speed": 3.17,
-      "clouds": 43,
+      "clouds": 48,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 92
     },
     {
       "dt": 1769763600,
-      "temp": 13.8,
+      "temp": 13.43,
       "wind_speed": 4.24,
-      "clouds": 80,
+      "clouds": 65,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 91
     },
     {
       "dt": 1769774400,
-      "temp": 15.89,
+      "temp": 14.93,
       "wind_speed": 6.52,
-      "clouds": 100,
+      "clouds": 83,
       "pop": 0.59,
       "rain_mm": 0.6,
       "humidity": 94
