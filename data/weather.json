@@ -14141,30 +14141,30 @@
     },
     {
       "dt": 1770012000,
-      "temp": 14.27,
+      "temp": 11.19,
       "wind_speed": 13.75,
       "clouds": 100,
       "pop": 1,
       "rain_mm": 8.13,
-      "humidity": 89
+      "humidity": 79
     },
     {
       "dt": 1770022800,
-      "temp": 12.68,
+      "temp": 11.19,
       "wind_speed": 14.71,
-      "clouds": 68,
+      "clouds": 84,
       "pop": 0.92,
       "rain_mm": 0.44,
-      "humidity": 81
+      "humidity": 77
     },
     {
       "dt": 1770033600,
-      "temp": 12.38,
+      "temp": 11.98,
       "wind_speed": 12.91,
-      "clouds": 44,
+      "clouds": 63,
       "pop": 1,
       "rain_mm": 0.52,
-      "humidity": 68
+      "humidity": 71
     },
     {
       "dt": 1770044400,
