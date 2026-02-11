@@ -14798,21 +14798,21 @@
     },
     {
       "dt": 1770800400,
-      "temp": 15.7,
+      "temp": 15.6,
       "wind_speed": 5.24,
       "clouds": 100,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 95
+      "humidity": 96
     },
     {
       "dt": 1770811200,
-      "temp": 17.18,
+      "temp": 16.62,
       "wind_speed": 6.62,
       "clouds": 99,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 84
+      "humidity": 88
     },
     {
       "dt": 1770822000,
