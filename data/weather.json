@@ -17066,66 +17066,66 @@
     },
     {
       "dt": 1773522000,
-      "temp": 14.58,
-      "wind_speed": 6.05,
-      "clouds": 66,
-      "pop": 0.22,
-      "rain_mm": 0.23,
-      "humidity": 86
+      "temp": 14.15,
+      "wind_speed": 5.99,
+      "clouds": 52,
+      "pop": 0.69,
+      "rain_mm": 0.36,
+      "humidity": 87
     },
     {
       "dt": 1773532800,
-      "temp": 14.3,
-      "wind_speed": 5.34,
-      "clouds": 89,
+      "temp": 14.25,
+      "wind_speed": 5.08,
+      "clouds": 74,
+      "pop": 0.32,
+      "rain_mm": 0.1,
+      "humidity": 89
+    },
+    {
+      "dt": 1773543600,
+      "temp": 13.73,
+      "wind_speed": 5.48,
+      "clouds": 62,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 88
     },
     {
-      "dt": 1773543600,
-      "temp": 13.11,
-      "wind_speed": 5.4,
-      "clouds": 24,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 90
-    },
-    {
       "dt": 1773554400,
-      "temp": 12.46,
-      "wind_speed": 5.12,
-      "clouds": 20,
+      "temp": 13.09,
+      "wind_speed": 5.73,
+      "clouds": 48,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 86
+      "humidity": 85
     },
     {
       "dt": 1773565200,
       "temp": 14.32,
-      "wind_speed": 5.28,
-      "clouds": 12,
+      "wind_speed": 5.47,
+      "clouds": 7,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 74
+      "humidity": 73
     },
     {
       "dt": 1773576000,
-      "temp": 17.45,
-      "wind_speed": 1.94,
-      "clouds": 6,
+      "temp": 17.26,
+      "wind_speed": 1.76,
+      "clouds": 4,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 63
+      "humidity": 62
     },
     {
       "dt": 1773586800,
-      "temp": 19.16,
-      "wind_speed": 2.72,
-      "clouds": 1,
+      "temp": 18.94,
+      "wind_speed": 2.42,
+      "clouds": 0,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 59
+      "humidity": 58
     },
     {
       "dt": 1773597600,
@@ -17414,6 +17414,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 72
+    },
+    {
+      "dt": 1773943200,
+      "temp": 16.14,
+      "wind_speed": 5.81,
+      "clouds": 17,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 81
     }
   ]
 }
