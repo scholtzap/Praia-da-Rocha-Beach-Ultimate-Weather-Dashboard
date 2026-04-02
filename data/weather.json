@@ -18773,6 +18773,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 66
+    },
+    {
+      "dt": 1775574000,
+      "temp": 15.59,
+      "wind_speed": 10.29,
+      "clouds": 25,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 64
     }
   ]
 }
