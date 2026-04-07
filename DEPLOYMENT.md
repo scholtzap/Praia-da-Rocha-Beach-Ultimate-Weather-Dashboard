@@ -68,9 +68,19 @@ This is the primary deployment method for hosting dashboards publicly.
    In **Settings > Secrets and variables > Actions > Secrets**, add:
    - `OWM_API_KEY` - OpenWeatherMap API key
    - `STORMGLASS_API_KEY` - StormGlass API key
-   - `GOOGLE_API_KEY` - Google Places API key
+   - `GOOGLE_API_KEY` - **Server** Places/Maps key for **Fetch Busyness** only (no HTTP referrer restriction; API-restrict to Places backends)
+   - `YOUTUBE_API_KEY` - **Browser** YouTube Data API key (HTTP referrer: your GitHub Pages URL). Required for locations with `youtube_search.enabled` (e.g. Clifton).
 
    **Note:** Google Place IDs are configured in `config.yml`, not as secrets.
+
+### Google Cloud: two API keys
+
+| Secret | Key type in GCP | Application restriction | API restriction |
+|--------|-----------------|-------------------------|-----------------|
+| `YOUTUBE_API_KEY` | e.g. “GitHub Pages – YouTube” | HTTP referrers → `https://YOUR_USER.github.io/*` | YouTube Data API v3 only |
+| `GOOGLE_API_KEY` | e.g. “GitHub Actions – Places” | None (or IP if you add a proxy) | Places / Maps backends used by `populartimes` only — **not** YouTube |
+
+Rotate any key that was previously committed in the repo. After creating keys in [Google Cloud Console](https://console.cloud.google.com/apis/credentials), paste values into each deployment repo’s **Actions secrets** (Clifton and Praia repos separately if both run workflows).
 
 4. **Enable GitHub Pages:**
    - Go to **Settings > Pages**
@@ -265,7 +275,7 @@ youtube_search:
   title_contains: "Stream title keywords"
 ```
 
-**Note**: Dynamic search requires a YouTube Data API v3 key in `scripts/build-html.js`. See [MULTI-REPO-WORKFLOW.md](MULTI-REPO-WORKFLOW.md#update-youtube-embed-urls) for setup details.
+**Note**: Dynamic search requires the `YOUTUBE_API_KEY` environment variable (GitHub secret for Actions, or `.env` locally); `build-html.js` embeds it into `index.html`. See [MULTI-REPO-WORKFLOW.md](MULTI-REPO-WORKFLOW.md#update-youtube-embed-urls).
 
 **Deploy**:
 1. Edit `config.yml` in the main repository

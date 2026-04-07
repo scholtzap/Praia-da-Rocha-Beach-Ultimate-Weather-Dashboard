@@ -41,15 +41,18 @@ In **Settings > Secrets and variables > Actions > Secrets**, add the following s
 #### Required for All Locations:
 - `OWM_API_KEY`: OpenWeatherMap API key ([get one here](https://openweathermap.org/api))
 - `STORMGLASS_API_KEY`: StormGlass API key for tide data ([get one here](https://stormglass.io/))
-- `GOOGLE_API_KEY`: Google Places API key ([get one here](https://developers.google.com/maps/documentation/places/web-service/get-api-key))
+- `GOOGLE_API_KEY`: **Server/CI** Google key for busyness (`fetch-busyness` workflow). Must **not** be restricted to HTTP referrers — GitHub Actions is not a browser. Restrict **APIs** to Places/Maps backends only. Place IDs live in `config.yml`.
+- `YOUTUBE_API_KEY`: **Browser** YouTube Data API v3 key, HTTP referrer restricted to `https://<user>.github.io/*`. Injected into `index.html` when `youtube_search.enabled` is true (Clifton). Omit or dummy only if that location disables YouTube search.
 
-**Note:** Google Place IDs are now configured in `config.yml` rather than as repository secrets.
+**Google Cloud setup (you):** Create **two** keys in the same project — one referrer-locked + YouTube-only for Pages, one unrestricted-by-referrer + Places-only for Actions. See [DEPLOYMENT.md](./DEPLOYMENT.md#google-cloud-two-api-keys).
+
+**Note:** Google Place IDs are configured in `config.yml`, not repository secrets.
 
 ### 4. Enable GitHub Pages
 
 1. Go to **Settings > Pages**
 2. Under **Source**, select **Deploy from a branch**
-3. Select the **main** (or **master**) branch
+3. Select the **main** branch
 4. Set folder to **/ (root)**
 5. Click **Save**
 
@@ -85,6 +88,9 @@ locations:
 
 ### When GitHub Actions Run:
 
+- **On every push to `main`:** workflow **Push pipeline — build and refresh data** builds `index.html` and refreshes weather, tides, and busyness in **one commit** (Clifton deploy repo recommended).
+- **On schedule / manual run:** the separate **Fetch Weather / Tide / Busyness** workflows still run as before.
+
 1. **Reads LOCATION variable** from repository variables
 2. **Loads config.yml** and extracts settings for that location
 3. **Builds HTML** using `scripts/build-html.js` with location-specific content
@@ -104,12 +110,14 @@ npm install
 # Set location (clifton or praia)
 export LOCATION=clifton
 
-# Build HTML for the location
+# Build HTML for the location (Clifton needs YOUTUBE_API_KEY if youtube_search is enabled)
+export YOUTUBE_API_KEY=your_browser_youtube_key_here
 npm run build
 
 # Fetch data (requires API keys in environment)
 export OWM_API_KEY=your_key_here
 export STORMGLASS_API_KEY=your_key_here
+export GOOGLE_API_KEY=your_server_places_key_here
 npm run fetch:weather
 npm run fetch:tides
 

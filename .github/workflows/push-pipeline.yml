@@ -1,0 +1,63 @@
+# Runs on every push to the default branch: build HTML, then refresh all data in one commit.
+# Pushes from this job use GITHUB_TOKEN and do not re-trigger this workflow (GitHub default).
+name: Push pipeline — build and refresh data
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    env:
+      LOCATION: ${{ vars.LOCATION || 'clifton' }}
+      OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
+      STORMGLASS_API_KEY: ${{ secrets.STORMGLASS_API_KEY }}
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Build location-specific HTML
+        run: node scripts/build-html.js
+
+      - name: Fetch weather data
+        run: node scripts/fetch-weather.js
+
+      - name: Fetch tide data
+        run: node scripts/fetch-tides.js
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install Python dependencies (populartimes)
+        run: |
+          pip install pyyaml
+          git clone https://github.com/m-wrzr/populartimes.git
+          pip install ./populartimes
+
+      - name: Fetch busyness data
+        run: python scripts/fetch-busyness.py
+
+      - name: Commit and push HTML + data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html data/weather.json data/tides.json data/busyness.json
+          git commit -m "chore: refresh dashboard HTML and data after push" || echo "No changes to commit"
+          git push

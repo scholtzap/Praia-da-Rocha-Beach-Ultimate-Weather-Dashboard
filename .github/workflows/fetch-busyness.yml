@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       LOCATION: ${{ vars.LOCATION || 'clifton' }}
+      # Server/CI Places key only — must NOT use HTTP referrer restriction (GitHub Actions is not a browser)
       GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-      GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
 
     steps:
       - uses: actions/checkout@v3

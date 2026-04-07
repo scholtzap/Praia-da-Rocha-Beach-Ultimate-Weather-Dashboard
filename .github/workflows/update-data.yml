@@ -16,6 +16,8 @@ jobs:
       # You can set this as a repository variable in GitHub Settings > Secrets and variables > Actions > Variables
       LOCATION: ${{ vars.LOCATION || 'clifton' }}
       OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
+      # Browser-restricted YouTube key (GitHub Pages). Only required if config has youtube_search.enabled
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
 
     steps:
       - uses: actions/checkout@v3

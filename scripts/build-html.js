@@ -21,6 +21,8 @@ let additionalEmbedsHTML = "";
 if (loc.additional_embeds && loc.additional_embeds.length > 0) {
   loc.additional_embeds.forEach(embed => {
     if (embed.type === "windy_webcam") {
+      const windyLabel =
+        embed.label || `${loc.name} – Windy Webcam`;
       additionalEmbedsHTML += `
   <!-- Windy Webcam Embed -->
   <div class="iframe-container">
@@ -35,7 +37,7 @@ if (loc.additional_embeds && loc.additional_embeds.length > 0) {
       href="https://windy.com/webcams/${embed.id}"
       target="_blank"
     >
-      Portimão: Praia da Rocha – Windy Webcam
+      ${windyLabel}
     </a>
     <script
       async
@@ -81,9 +83,23 @@ if (loc.whatsapp_form) {
 `;
 }
 
-// Build YouTube search configuration script
+// Build YouTube search configuration script (browser key from env — never hardcode in this file)
 let youtubeConfigScript = "";
 if (loc.youtube_search && loc.youtube_search.enabled) {
+  const youtubeApiKey = (process.env.YOUTUBE_API_KEY || "").trim();
+  const inCi =
+    process.env.GITHUB_ACTIONS === "true" || process.env.CI === "true";
+  if (!youtubeApiKey && inCi) {
+    console.error(
+      "❌ YOUTUBE_API_KEY is required when youtube_search.enabled is true in CI. Add GitHub Actions secret YOUTUBE_API_KEY."
+    );
+    process.exit(1);
+  }
+  if (!youtubeApiKey && !inCi) {
+    console.warn(
+      "⚠️  YOUTUBE_API_KEY not set; generated HTML will have an empty key (YouTube search falls back to the default channel embed). Set the variable for production or use CI to inject the browser key."
+    );
+  }
   youtubeConfigScript = `
 <script>
   // YouTube search configuration
@@ -92,8 +108,7 @@ if (loc.youtube_search && loc.youtube_search.enabled) {
     channel_id: "${loc.youtube_search.channel_id}",
     title_contains: "${loc.youtube_search.title_contains}"
   };
-  // YouTube API key (restricted to scholtzap.github.io domain)
-  window.YOUTUBE_API_KEY = "REDACTED_ROTATED_KEY_REMOVED_FROM_HISTORY";
+  window.YOUTUBE_API_KEY = ${JSON.stringify(youtubeApiKey)};
 </script>
 `;
 }

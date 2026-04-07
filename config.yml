@@ -50,5 +50,6 @@ locations:
     additional_embeds:
       - type: "windy_webcam"
         id: "1570400523"
+        label: "Portimão: Praia da Rocha – Windy Webcam"
       - type: "beachcam"
         url: "https://beachcam.meo.pt/livecams/praia-da-rocha/"
