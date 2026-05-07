@@ -20945,30 +20945,30 @@
     },
     {
       "dt": 1778176800,
-      "temp": 17.68,
+      "temp": 16.05,
       "wind_speed": 5.52,
-      "clouds": 57,
+      "clouds": 72,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 59
+      "humidity": 64
     },
     {
       "dt": 1778187600,
-      "temp": 15.7,
+      "temp": 15.47,
       "wind_speed": 3.17,
-      "clouds": 83,
+      "clouds": 81,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 68
     },
     {
       "dt": 1778198400,
-      "temp": 13.66,
+      "temp": 14.46,
       "wind_speed": 1.85,
-      "clouds": 100,
+      "clouds": 91,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 78
+      "humidity": 74
     },
     {
       "dt": 1778209200,
