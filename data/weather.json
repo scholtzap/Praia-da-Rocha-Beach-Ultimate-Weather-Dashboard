@@ -20927,30 +20927,30 @@
     },
     {
       "dt": 1778155200,
-      "temp": 16.73,
+      "temp": 18.4,
       "wind_speed": 3.83,
-      "clouds": 14,
+      "clouds": 35,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 59
+      "humidity": 53
     },
     {
       "dt": 1778166000,
-      "temp": 17.61,
+      "temp": 18.42,
       "wind_speed": 6.82,
       "clouds": 45,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 56
+      "humidity": 54
     },
     {
       "dt": 1778176800,
-      "temp": 16.08,
+      "temp": 16.85,
       "wind_speed": 5.58,
-      "clouds": 83,
+      "clouds": 67,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 63
+      "humidity": 60
     },
     {
       "dt": 1778187600,
