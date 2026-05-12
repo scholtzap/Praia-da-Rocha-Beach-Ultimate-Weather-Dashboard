@@ -21287,30 +21287,30 @@
     },
     {
       "dt": 1778587200,
-      "temp": 16.75,
+      "temp": 17.77,
       "wind_speed": 4.59,
-      "clouds": 6,
+      "clouds": 9,
       "pop": 0.9,
       "rain_mm": 0.44,
-      "humidity": 75
+      "humidity": 71
     },
     {
       "dt": 1778598000,
-      "temp": 17.38,
+      "temp": 17.83,
       "wind_speed": 4.78,
-      "clouds": 6,
+      "clouds": 8,
       "pop": 0.2,
       "rain_mm": 0.15,
-      "humidity": 73
+      "humidity": 71
     },
     {
       "dt": 1778608800,
-      "temp": 17.23,
+      "temp": 17.41,
       "wind_speed": 4.53,
-      "clouds": 21,
+      "clouds": 17,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 75
+      "humidity": 74
     },
     {
       "dt": 1778619600,
