@@ -22025,27 +22025,27 @@
     },
     {
       "dt": 1779472800,
-      "temp": 23.96,
+      "temp": 22.75,
       "wind_speed": 3.66,
-      "clouds": 62,
+      "clouds": 41,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 51
+      "humidity": 57
     },
     {
       "dt": 1779483600,
-      "temp": 21.16,
+      "temp": 21.65,
       "wind_speed": 1,
-      "clouds": 26,
+      "clouds": 28,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 60
     },
     {
       "dt": 1779494400,
-      "temp": 19.28,
+      "temp": 20.44,
       "wind_speed": 3.3,
-      "clouds": 17,
+      "clouds": 25,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 59
