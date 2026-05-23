@@ -22463,6 +22463,15 @@
       "pop": 0,
       "rain_mm": 0,
       "humidity": 56
+    },
+    {
+      "dt": 1780002000,
+      "temp": 19.47,
+      "wind_speed": 2.8,
+      "clouds": 15,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 68
     }
   ]
 }
