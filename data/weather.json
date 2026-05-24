@@ -22151,30 +22151,30 @@
     },
     {
       "dt": 1779624000,
-      "temp": 21.96,
+      "temp": 23.01,
       "wind_speed": 5.61,
-      "clouds": 100,
+      "clouds": 99,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 54
+      "humidity": 53
     },
     {
       "dt": 1779634800,
-      "temp": 21.68,
+      "temp": 22.61,
       "wind_speed": 3.37,
-      "clouds": 95,
+      "clouds": 97,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 61
+      "humidity": 57
     },
     {
       "dt": 1779645600,
-      "temp": 21.32,
+      "temp": 21.88,
       "wind_speed": 3.88,
       "clouds": 100,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 62
+      "humidity": 59
     },
     {
       "dt": 1779656400,
