@@ -23411,30 +23411,30 @@
     },
     {
       "dt": 1781136000,
-      "temp": 19.77,
+      "temp": 19.78,
       "wind_speed": 3.05,
-      "clouds": 0,
-      "pop": 0,
-      "rain_mm": 0,
-      "humidity": 61
-    },
-    {
-      "dt": 1781146800,
-      "temp": 19.2,
-      "wind_speed": 3.02,
       "clouds": 0,
       "pop": 0,
       "rain_mm": 0,
       "humidity": 58
     },
     {
+      "dt": 1781146800,
+      "temp": 19.49,
+      "wind_speed": 3.02,
+      "clouds": 0,
+      "pop": 0,
+      "rain_mm": 0,
+      "humidity": 57
+    },
+    {
       "dt": 1781157600,
-      "temp": 18.91,
+      "temp": 19.2,
       "wind_speed": 3.14,
       "clouds": 0,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 63
+      "humidity": 62
     },
     {
       "dt": 1781168400,
