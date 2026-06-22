@@ -24275,7 +24275,7 @@
     },
     {
       "dt": 1782172800,
-      "temp": 20.46,
+      "temp": 20.11,
       "wind_speed": 2.76,
       "clouds": 100,
       "pop": 0,
@@ -24284,16 +24284,16 @@
     },
     {
       "dt": 1782183600,
-      "temp": 19.85,
+      "temp": 19.89,
       "wind_speed": 3.21,
       "clouds": 100,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 79
+      "humidity": 78
     },
     {
       "dt": 1782194400,
-      "temp": 20.04,
+      "temp": 20.06,
       "wind_speed": 1.45,
       "clouds": 100,
       "pop": 0,
