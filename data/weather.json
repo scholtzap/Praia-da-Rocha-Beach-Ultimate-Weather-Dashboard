@@ -24329,30 +24329,30 @@
     },
     {
       "dt": 1782237600,
-      "temp": 24.26,
+      "temp": 23.55,
       "wind_speed": 6.07,
-      "clouds": 25,
+      "clouds": 35,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 65
+      "humidity": 66
     },
     {
       "dt": 1782248400,
-      "temp": 21.03,
+      "temp": 22.11,
       "wind_speed": 3.92,
-      "clouds": 13,
+      "clouds": 27,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 80
+      "humidity": 74
     },
     {
       "dt": 1782259200,
-      "temp": 18.37,
+      "temp": 20.1,
       "wind_speed": 2.72,
-      "clouds": 8,
+      "clouds": 17,
       "pop": 0,
       "rain_mm": 0,
-      "humidity": 91
+      "humidity": 83
     },
     {
       "dt": 1782270000,
